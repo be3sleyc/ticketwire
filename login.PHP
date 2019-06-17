@@ -13,7 +13,7 @@
 <div class="loginFormDiv">
     <form action="index.php" method="post" class="loginForm">
         <label id="Welcome">Welcome to TicketWire!</label><br/><br/>
-        <input placeholder="Username" name="user" type="text" autofocus /><br /><br/>
+        <input placeholder="Email" name="user" type="text" autofocus /><br /><br/>
         <input placeholder="Password" name="pass" type="password" /><br/><br/>
         <input name="submit" type="submit" value="submit" /><br /><br/>
         <a href="https://www.facebook.com/CRMBeesley" target="_blank">Forgot Password?</a>
