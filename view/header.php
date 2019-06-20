@@ -3,11 +3,19 @@
 
   // If no user is logged in, go to the login
   // TODO set the user variable somehow. This will take the form of allowing a user to stay logged in
-  if ( !isset($_SESSION['user'])){
-    header("location:login.php");
-  }
-  $first_name = $_SESSION['first_name'];
-  $last_name = $_SESSION['last_name'];
+  if ( !isset($_SESSION['email'])){
+    header("location:/login.php");
+  } 
+  
+  if (isset($_SESSION['first_name']) and ISSET($_SESSION['last_name']) and ISSET($_SESSION['user_role']) ) {
+    $firstName = $_SESSION['first_name'];
+    $lastName = $_SESSION['last_name'];  
+    $userRole = $_SESSION['user_role'];
+  } else {
+    $firstName = '';
+    $lastName = '';
+    $userRole = '';
+  }  
 ?>
 
 <!DOCTYPE html>
@@ -19,10 +27,12 @@
 </head>
 
 <body>
-    Welcome <?=$first_name?> <?=$last_name?>
     <header>
-        <h1>Ticketwire</h1>
+    <div class="menu_banner_div">
+      <ul class="menu_banner">
+        <li><img src="../images/ticket_100_90.png" alt="ticketwire logo"></li>
+        <li class="right"><a href="../logout.php">Logout</a></li>
+      </ul>
+    </div>  
     </header>
-</body>
-
-</html>
+    <h1>Ticketwire</h1>

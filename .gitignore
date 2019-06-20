@@ -38,4 +38,7 @@ ehthumbs.db
 Thumbs.db
 #####################
 # Our chosen Files ##############
-Hello\ World/
+.viminfo
+web.config
+Design/
+MSSQLDriver/

@@ -15,3 +15,20 @@
 body {
 	background-color: #00aae8;
 }
+
+.menu_banner_div {
+	background-color: #737677;
+}
+
+ul.menu_banner li {
+	display: inline;
+}
+
+li.right {
+	float: right;
+}
+
+.errors {
+	color: #c40000;
+	text-shadow: 2px 1px #000000;
+}
