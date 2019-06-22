@@ -39,6 +39,7 @@ Thumbs.db
 #####################
 # Our chosen Files ##############
 .viminfo
+.vscode/
 web.config
 Design/
 MSSQLDriver/

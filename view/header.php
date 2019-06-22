@@ -5,16 +5,6 @@
   // TODO set the user variable somehow. This will take the form of allowing a user to stay logged in
   if ( !isset($_SESSION['email'])){
     header("location:/login.php");
-  } 
-  
-  if (isset($_SESSION['first_name']) and ISSET($_SESSION['last_name']) and ISSET($_SESSION['user_role']) ) {
-    $firstName = $_SESSION['first_name'];
-    $lastName = $_SESSION['last_name'];  
-    $userRole = $_SESSION['user_role'];
-  } else {
-    $firstName = '';
-    $lastName = '';
-    $userRole = '';
   }  
 ?>
 

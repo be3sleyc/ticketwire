@@ -31,7 +31,7 @@ if ($action == 'login') {
         $_SESSION['first_name'] = $user['FirstName'];
         $_SESSION['last_name'] = $user['LastName'];
         $_SESSION['user_role'] = $user['UserRole'];
-        header('Location: ../index.php'); //TODO
+        header('Location: /index.php'); //TODO
     }
 } else {
     // R&D needed to fill out this use case

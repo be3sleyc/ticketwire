@@ -1,17 +1,27 @@
 <?php 
     session_start();
-    include 'view/header.php';    
+    include 'view/header.php'; 
+       
+    if (ISSET($_SESSION['first_name']) and ISSET($_SESSION['last_name']) and ISSET($_SESSION['user_role']) ) {
+        $firstName = $_SESSION['first_name'];
+        $lastName = $_SESSION['last_name'];  
+        $userRole = $_SESSION['user_role'];
+      } else {
+        $firstName = '';
+        $lastName = '';
+        $userRole = '';
+      } 
 ?>
 <div>
 <?php switch($userRole){ 
 case 'Corp':
-    echo ("<p>Welcome <?=$firstName?> <?=$lastName?>, what would you like to do today?</p>");
+    include "view/corphome.php";
     break;
 case 'Tech':
-    echo ("<p>You have 0 open tickets</p>");
+    include 'view/techhome.php';
     break;
 case 'Cust':
-    echo ("<p>How can we help you today?</p>");
+    include 'view/custhome.php';
     break;
 } ?>
 </div>
