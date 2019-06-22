@@ -33,6 +33,9 @@ if ($action == 'login') {
         $_SESSION['user_role'] = $user['UserRole'];
         header('Location: /index.php'); //TODO
     }
+} elseif ($action == 'list') {
+    $users = get_users();
+    include 'userlist.php';
 } else {
     // R&D needed to fill out this use case
 }

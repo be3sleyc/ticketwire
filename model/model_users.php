@@ -22,7 +22,7 @@ function get_user($email, $password) {
 function get_users() {
     global $connection;
     $users = array();
-    $query = "SELECT FirstName, LastName, EmailAddress, UserRole FROM UserInfo";
+    $query = "SELECT FirstName, LastName, EmailAddress, PhoneNumber, UserRole FROM UserInfo";
     $statement = sqlsrv_query( $connection, $query );
     
     if ( $statement === false ) {

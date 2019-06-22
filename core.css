@@ -32,3 +32,17 @@ li.right {
 	color: #c40000;
 	text-shadow: 2px 1px #000000;
 }
+
+table.lists {
+	margin: auto;
+	background: #ffffff;
+}
+
+table.lists, th, td {
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+
+table.lists th {
+	font-weight: bold;
+}
