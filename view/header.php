@@ -13,14 +13,14 @@
 
 <head>
     <title>Ticketwire</title>
-    <link rel="stylesheet" type="text/css" href="../core.css">
+    <link rel="stylesheet" type="text/css" href="../design/core.css">
 </head>
 
 <body>
     <header>
     <div class="menu_banner_div">
       <ul class="menu_banner">
-        <li><img src="../images/ticket_100_90.png" alt="ticketwire logo"></li>
+        <li><a href="/index.php"><img src="../images/ticket_100_90.png" alt="ticketwire logo"></a></li>
         <li class="right"><a href="../logout.php">Logout</a></li>
       </ul>
     </div>  

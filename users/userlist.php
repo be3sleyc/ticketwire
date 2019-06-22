@@ -1,5 +1,12 @@
-<?php include '../view/header.php'?>
-<table class="lists">
+<?php include '../view/header.php';
+
+if ($_SESSION['user_role'] != 'Corp') {
+    header('Location: /index.php');
+}
+
+?>
+<div class="list">
+<table>
 <tr>
     <th>Email</th>
     <th>First Name</th>
@@ -9,6 +16,7 @@
 </tr>
     <?php foreach ($users as $user): ?>
         <tr>
+            <a href=""></a>
             <td><?=$user['EmailAddress']?></td>
             <td><?=$user['FirstName']?></td>
             <td><?=$user['LastName']?></td>
@@ -21,4 +29,6 @@
         </tr>
     <?php endforeach;?>
 </table>
+<a href="/users/index.php?action=createAccount"><button type="button">+</button>Create Account</a>
+</div>
 <?php include '../view/footer.php'?>

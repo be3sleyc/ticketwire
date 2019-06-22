@@ -1,0 +1,58 @@
+﻿@font-face {
+	font-family: "DIN OT";
+	src: url(fonts/DINOT-Light.otf);
+}
+
+.loginFormDiv {
+	position: relative;
+}
+
+.loginForm {
+	margin: auto;
+	background-color: #737677;
+	width: 300px;
+	height: 150px;
+	padding: 40px 0 80px 0;
+	text-align: center;
+	color:#ffffff;
+	border-radius: 25px;	
+}
+
+body, p {
+	background-color: #00aae8;
+	font-family: "DIN OT", 'Courier New', Courier, monospace;
+}
+
+.menu_banner_div {
+	background-color: #737677;
+}
+
+ul.menu_banner li {
+	display: inline;
+}
+
+li.right {
+	float: right;
+}
+
+.errors {
+	color: #c40000;
+	text-shadow: 2px 1px #000000;
+}
+div.list table {
+	margin: auto;
+	background: #ffffff;
+}
+
+div.list table, th, td {
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+
+div.list  th {
+	font-weight: bold;
+}
+
+button {
+	font-weight: bolder;
+}

@@ -36,6 +36,10 @@ if ($action == 'login') {
 } elseif ($action == 'list') {
     $users = get_users();
     include 'userlist.php';
+} elseif ($action == 'viewAccount') {
+    include 'accountview.php';
+} elseif ($action == 'createAccount') {
+    include 'createaccount.php';
 } else {
     // R&D needed to fill out this use case
 }

@@ -35,15 +35,3 @@ function get_users() {
 
     return $users;
 }
-
-//trouble shooting
-// global $connection;
-// $server_info = sqlsrv_server_info( $connection);
-// if( $server_info )
-// {
-//     foreach( $server_info as $key => $value) {
-//        echo $key.": ".$value."<br />";
-//     }
-// } else {
-//       die( print_r( sqlsrv_errors(), true));
-// }
