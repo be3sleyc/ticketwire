@@ -1,11 +1,10 @@
 <?php
-  header('Content-Type: text/html; charset=iso-8859-1');
-
   // If no user is logged in, go to the login
-  // TODO set the user variable somehow. This will take the form of allowing a user to stay logged in
-  if ( !isset($_SESSION['email'])){
-    header("location:/login.php");
+  if ( !isset($_SESSION['email']) ){
+    header( "Location:/login.php" );
+    exit();
   }  
+  header('Content-Type: text/html; charset=iso-8859-1');
 ?>
 
 <!DOCTYPE html>
@@ -20,9 +19,21 @@
     <header>
     <div class="menu_banner_div">
       <ul class="menu_banner">
-        <li><a href="/index.php"><img src="../images/ticket_100_90.png" alt="ticketwire logo"></a></li>
-        <li class="right"><a href="../logout.php">Logout</a></li>
+        <li>
+          <a href="/index.php"><img src="../images/ticket_100_90.png" alt="ticketwire logo">
+          <span id='head-title'>Ticketwire</span></a>
+        </li>
+        <div class="right">
+          <li class="right">
+            <a href="../users/index.php?action=viewAccount" title="View Account"><?=$_SESSION['first_name'] . " " . $_SESSION['last_name'];?></a>&nbsp;&nbsp;
+          </li>
+          <li class="right">
+            <a href="../logout.php">
+              <button>Logout</button>
+            </a>
+          </li>
+        </div>
       </ul>
-    </div>  
+    </div>
+    <div class="bar"></div>
     </header>
-    <h1>Ticketwire</h1>

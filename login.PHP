@@ -1,8 +1,9 @@
 <?php
-    session_start();
     if ( ISSET( $_SESSION['email'] ) ) {
         header( 'Location:/index.php' );
+        exit();
     }
+    session_start();
     $errors = filter_input(INPUT_GET, 'errors');
 ?>
 <!DOCTYPE html>
@@ -14,18 +15,18 @@
     <link rel="stylesheet" type="text/css" href="../design/core.css">
     <title>Ticketwire - Login</title>
 </head>
-<body>
+<body class="login">
 <div class="loginFormDiv">
     <form action="/users/index.php" method="post" class="loginForm">
         <label id="Welcome">Welcome to TicketWire!</label><br/><br/>
         <input type="hidden" name="action" value="login" />
-        <input placeholder="Email" name="user" type="text" autofocus /><br /><br/>
+        <input placeholder="Email" name="user" type="email" autofocus /><br /><br/>
         <input placeholder="Password" name="pass" type="password" /><br/><br/>
         <div class="errors"><?=$errors?>
         <?php if ( $errors != '' ): echo "<br/><br/>"; endif; ?>
         </div>
         <input name="submit" type="submit" value="submit" /><br /><br/>
-        <a href="https://www.facebook.com/CRMBeesley" target="_blank">Forgot Password?</a>        
+        <a id="forgot" href="https://www.facebook.com/CRMBeesley" target="_blank">Forgot Password?</a>        
     </form>
 </div>
 </body>

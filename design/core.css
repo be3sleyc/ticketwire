@@ -3,6 +3,59 @@
 	src: url(fonts/DINOT-Light.otf);
 }
 
+body{
+	background-color: #ffffff; 
+	font-family: "DIN OT", 'Courier New', Courier, monospace;
+}
+
+body.login {
+	background-color: #00aae8;
+}
+
+header {
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	overflow: hidden;
+	width: 100%;
+	height: 54px;
+	color: #ffffff;
+	background-color: #002554;
+}
+
+footer {
+	position: fixed;
+	left: 0px;
+	bottom: 0px;
+	width: 100%;
+	height: 50px;
+	margin: 0px;
+	color: #ffffff;
+	background-color: #737677;
+}
+
+section {
+	position: fixed;
+	left: 0px;
+	top: 59px;
+	bottom: 60px;
+	width: 100%;
+	margin: 0px;
+	overflow: auto;
+	text-align: center;
+}
+
+#head-title {
+	font-size: 32pt;
+	vertical-align: top;
+	color: #ffffff;
+}
+
+div.sectionContent {
+	display: inline-block;
+	text-align: left;
+}
+
 .loginFormDiv {
 	position: relative;
 }
@@ -11,37 +64,73 @@
 	margin: auto;
 	background-color: #737677;
 	width: 300px;
-	height: 150px;
-	padding: 40px 0 80px 0;
+	padding: 40px 0 40px 0;
 	text-align: center;
 	color:#ffffff;
 	border-radius: 25px;	
 }
 
-body, p {
-	background-color: #00aae8;
-	font-family: "DIN OT", 'Courier New', Courier, monospace;
-}
-
-.menu_banner_div {
-	background-color: #737677;
+ul.menu_banner {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
 }
 
 ul.menu_banner li {
-	display: inline;
+	float: left;
 }
 
-li.right {
-	float: right;
+ul.menu_banner li a, .dropdown {
+	display: inline-block;
+	text-align: center;
+	padding: 1px;
+	text-decoration: none;
+	color: white;
+}
+
+ul.menu_banner div.right, ul.menu_banner li.right {
+float: right;	
+}
+
+div.right li.right {
+	float: left;
+}
+
+.left {
+	float: left;
+}
+
+div.bar {
+	position: fixed;
+	left: 0px;
+	top: 54px;
+	width: 100%;
+	height: 5px;
+	background-color: #00aae8;
+}
+
+p.Ticketwire-copyright {
+ text-align: center;
+ margin: 0px;	
 }
 
 .errors {
 	color: #c40000;
-	text-shadow: 2px 1px #000000;
+	text-shadow: 1px 0px #000000;
 }
-div.list table {
+
+div.list {
 	margin: auto;
+	padding: 20px;
+	width: 600px;
+	background-color: #00aae8;
+}
+
+div.list table {
 	background: #ffffff;
+	margin: auto;
+	box-shadow: 3px 3px #4b4b4b 
 }
 
 div.list table, th, td {
@@ -53,6 +142,51 @@ div.list  th {
 	font-weight: bold;
 }
 
+div.list td {
+	text-align: left;
+}
+
 button {
 	font-weight: bolder;
+}
+
+.newAccount {
+	display: grid;
+	grid-template-columns: auto auto;
+	background-color: #00aae8;
+	padding: 10px;
+	width: 600px;
+	margin: auto;
+}
+
+.gitem-right, .gitem-left {
+	padding: 5px;
+}
+
+.gitem-left {
+	text-align: right;
+	font-weight: bold;
+}
+
+.gitem-right {
+	text-align: left;
+}
+
+*[data-href] {
+	cursor: pointer;
+}
+
+td a {
+display:inline-block;
+min-height: 100%;
+width: 100%;
+padding: 10px;
+}
+
+td.link {
+	padding: 0;
+}
+
+a#forgot {
+	color: #fff;
 }

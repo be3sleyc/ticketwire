@@ -1,7 +1,7 @@
 <?php
 // Start the session
 session_start();
-require('../model/model_users.php');
+require('../model/users_database.php');
 
 // Determine the function to run
 $action = filter_input(INPUT_POST, 'action');
@@ -17,28 +17,50 @@ if ($action == 'login') {
     // TODO determine user role here, it should be part of user
     $email = filter_input(INPUT_POST, 'user', FILTER_VALIDATE_EMAIL, FILTER_SANITIZE_EMAIL);
     $password = filter_input(INPUT_POST, 'pass');
-
-    if ( $email == NULL or $password == NULL) {
-        header( 'Location:/login.php?errors=Missing Credentials'); //TODO 
+    $errors = array();
+    if ( $email == NULL ) {
+        array_push($errors,'Missing email');
+    } 
+    if ($password == NULL) {
+        array_push($errors,'Missing password'); //TODO 
+    }
+    if (count($errors) > 1) {
+        $errorstr = join(", ", $errors);
+        header("Location: /login.php?errors=$errorstr");
+        exit();
+    } else if (count($errors) > 0) {
+        header("Location: /login.php?errors=$errors[0]");
+        exit();
     }
 
-    $user = get_user($email, $password);
+    $user = login($email, $password);
 
     if ($user == null) {
-        header("Location:/login.php?errors=Invalid Login Credentials"); //TODO 
+        header("Location: /login.php?errors=Invalid Credentials");
+        exit();
     } else {
-        $_SESSION['email'] = $user['EmailAddress'];
-        $_SESSION['first_name'] = $user['FirstName'];
-        $_SESSION['last_name'] = $user['LastName'];
-        $_SESSION['user_role'] = $user['UserRole'];
+        $_SESSION['first_name'] = $user[0];
+        $_SESSION['last_name'] = $user[1];
+        $_SESSION['email'] = $user[2];
+        $_SESSION['phone'] = $user[3];
+        $_SESSION['user_role'] = get_role($user[4]);
         header('Location: /index.php'); //TODO
+        exit();
     }
 } elseif ($action == 'list') {
     $users = get_users();
     include 'userlist.php';
 } elseif ($action == 'viewAccount') {
-    include 'accountview.php';
+    if ($email = filter_input(INPUT_GET, 'email')) {
+        $lookup_user = get_user($email);
+        $role_name = get_role($lookup_user['UserRole']);
+        include 'accountview.php';
+    } else {
+        $role_name = $_SESSION['user_role'];
+        include 'accountview.php';
+    }
 } elseif ($action == 'createAccount') {
+    $roles = get_UserRoles();
     include 'createaccount.php';
 } else {
     // R&D needed to fill out this use case

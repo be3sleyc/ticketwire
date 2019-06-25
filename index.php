@@ -11,19 +11,17 @@
         $lastName = '';
         $userRole = '';
       } 
-?>
-<div>
-<?php switch($userRole){ 
-case 'Corp':
+      
+switch($userRole){ 
+case "Corporate":
     include "view/corphome.php";
     break;
-case 'Tech':
+case "Technician":
     include 'view/techhome.php';
     break;
-case 'Cust':
+case "Customer":
     include 'view/custhome.php';
     break;
-} ?>
-</div>
+}
 
-<?php include 'view/footer.php';?>
+include 'view/footer.php';
