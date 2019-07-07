@@ -16,19 +16,22 @@
     <title>Ticketwire - Login</title>
 </head>
 <body class="login">
-<div class="loginFormDiv">
-    <form action="/users/index.php" method="post" class="loginForm">
-        <label id="Welcome">Welcome to TicketWire!</label><br/><br/>
-        <input type="hidden" name="action" value="login" />
-        <input placeholder="Email" name="user" type="email" autofocus /><br /><br/>
-        <input placeholder="Password" name="pass" type="password" /><br/><br/>
-        <div class="errors"><?=$errors?>
-        <?php if ( $errors != '' ): echo "<br/><br/>"; endif; ?>
+    <section>
+        <div class="loginFormDiv">
+            <form action="/users/index.php" method="post" class="loginForm">
+                <label id="Welcome">Welcome to TicketWire!</label><br/><br/>
+                <input type="hidden" name="action" value="login" />
+                <input placeholder="Email" name="user" type="email" autofocus /><br /><br/>
+                <input placeholder="Password" name="pass" type="password" /><br/><br/>
+                <div class="errors"><?=$errors?>
+                <?php if ( $errors != '' ): echo "<br/><br/>"; endif; ?>
+                </div>
+                <input name="submit" type="submit" value="submit" /><br /><br/>
+                <a id="forgot" href="https://www.facebook.com/CRMBeesley" target="_blank">Forgot Password?</a>  
+                <!--TODO: create password recovery page -->
+            </form>
         </div>
-        <input name="submit" type="submit" value="submit" /><br /><br/>
-        <a id="forgot" href="https://www.facebook.com/CRMBeesley" target="_blank">Forgot Password?</a>  
-        <!--TODO: create password recovery page -->
-    </form>
-</div>
-</body>
-</html>
+    </section>
+<?php
+include 'view/footer.php';
+?>
