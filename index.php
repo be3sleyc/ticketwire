@@ -13,7 +13,7 @@
       } 
       
 switch($userRole){ 
-case "Corporate":
+case "Corporate User":
     include "view/corphome.php";
     break;
 case "Technician":

@@ -22,7 +22,7 @@ if ($action == 'login') {
         array_push($errors,'Missing email');
     } 
     if ($password == NULL) {
-        array_push($errors,'Missing password'); //TODO 
+        array_push($errors,'Missing password'); //TODO count bad attempts, prompt to recover password to unlock account
     }
     if (count($errors) > 1) {
         $errorstr = join(", ", $errors);
@@ -43,7 +43,12 @@ if ($action == 'login') {
         $_SESSION['last_name'] = $user[1];
         $_SESSION['email'] = $user[2];
         $_SESSION['phone'] = $user[3];
-        $_SESSION['user_role'] = get_role($user[4]);
+        $_SESSION['user_role'] = $user[4];
+        if ($user[5] == NULL) {
+            $_SESSION['profile_path'] = 'default.png';
+        } else {
+            $_SESSION['profile_path'] = $user[5];
+        }
         header('Location: /index.php'); //TODO
         exit();
     }

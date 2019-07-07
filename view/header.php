@@ -24,14 +24,16 @@
           <span id='head-title'>Ticketwire</span></a>
         </li>
         <div class="right">
-          <li class="right">
-            <a href="../users/index.php?action=viewAccount" title="View Account"><?=$_SESSION['first_name'] . " " . $_SESSION['last_name'];?></a>&nbsp;&nbsp;
-          </li>
-          <li class="right">
-            <a href="../logout.php">
-              <button>Logout</button>
-            </a>
-          </li>
+          <span>
+            <li class="right">
+              <a href="../users/index.php?action=viewAccount" title="View Account"><img class="avatar" src="<?="../images/Profiles/" . $_SESSION['profile_path'];?>" alt="User Profile Picture"><?=$_SESSION['first_name'] . " " . $_SESSION['last_name'];?></a>&nbsp;&nbsp;
+            </li>
+            <li class="right">
+              <a href="../logout.php">
+                <button>Logout</button>
+              </a>
+            </li>
+          </span>
         </div>
       </ul>
     </div>

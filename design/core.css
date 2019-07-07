@@ -23,6 +23,12 @@ header {
 	background-color: #002554;
 }
 
+.avatar {
+	border-radius: 50%;
+	vertical-align: middle;
+	margin-right: 5px;
+}
+
 footer {
 	position: fixed;
 	left: 0px;
@@ -57,6 +63,7 @@ div.sectionContent {
 }
 
 .loginFormDiv {
+	margin: auto;
 	position: relative;
 }
 
@@ -90,13 +97,23 @@ ul.menu_banner li a, .dropdown {
 }
 
 ul.menu_banner div.right, ul.menu_banner li.right {
-float: right;	
+	float: right;	
 }
 
 div.right li.right {
 	float: left;
 }
 
+header ul.menu_banner div.right {
+	height: 54px;
+	line-height: 54px;
+}
+
+div.right span {
+	vertical-align: middle;
+	line-height: normal;
+	display: inline-block;
+}
 .left {
 	float: left;
 }
