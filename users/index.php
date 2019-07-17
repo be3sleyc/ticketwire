@@ -22,7 +22,7 @@ if ($action == 'login') {
         array_push($errors,'Missing email');
     } 
     if ($password == NULL) {
-        array_push($errors,'Missing password'); //TODO count bad attempts, prompt to recover password to unlock account
+        array_push($errors,'Missing password'); 
     }
     if (count($errors) > 1) {
         $errorstr = join(", ", $errors);
@@ -33,6 +33,7 @@ if ($action == 'login') {
         exit();
     }
 
+    //TODO count bad attempts, prompt to recover password to unlock account
     $user = login($email, $password);
 
     if ($user == null) {
@@ -49,6 +50,7 @@ if ($action == 'login') {
         } else {
             $_SESSION['profile_path'] = $user[5];
         }
+        var_dump($user);
         header('Location: /index.php'); //TODO
         exit();
     }
@@ -58,7 +60,6 @@ if ($action == 'login') {
 } elseif ($action == 'viewAccount') {
     if ($email = filter_input(INPUT_GET, 'email')) {
         $lookup_user = get_user($email);
-        $role_name = get_role($lookup_user['UserRole']);
         include 'accountview.php';
     } else {
         $role_name = $_SESSION['user_role'];

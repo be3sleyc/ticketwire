@@ -26,9 +26,6 @@ function get_users() {
     }
 
     while ( $row = sqlsrv_fetch_array( $statement, SQLSRV_FETCH_ASSOC ) ) {
-        $role = array_pop($row);
-        $roleName = get_role($role);
-        $row += ['UserRole' => $roleName];
         array_push($users, $row);
     }
 
@@ -65,20 +62,4 @@ function get_UserRoles() {
 
     return $roles;
 }
-
-function get_role($roleId) {
-    global $connection;
-    $role = '';
-    $query = "EXEC uspGetRole @RoleId = ?";
-    $params = array( $roleId );
-    $statement = sqlsrv_query( $connection, $query, $params );
-    
-    if ( $statement === false ) {
-        die( print_r( sqlsrv_errors(), true ) );
-    }
-
-    $role = sqlsrv_fetch_array( $statement );
-    return $role[0]; 
-}
-
 ?>

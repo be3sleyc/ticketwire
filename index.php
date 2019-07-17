@@ -1,20 +1,19 @@
 <?php 
     session_start();
     include 'view/header.php'; 
-       
-    if (ISSET($_SESSION['first_name']) and ISSET($_SESSION['last_name']) and ISSET($_SESSION['user_role']) ) {
-        $firstName = $_SESSION['first_name'];
-        $lastName = $_SESSION['last_name'];  
-        $userRole = $_SESSION['user_role'];
-      } else {
-        $firstName = '';
-        $lastName = '';
-        $userRole = '';
-      } 
-      
-switch($userRole){ 
-case "Corporate User":
+            
+switch($_SESSION['user_role']){ 
+case "Corporate User - SysAdmin":
     include "view/corphome.php";
+    break;
+case "Corporate User - Manager":
+    include "view/corphome.php";
+    break;
+case "Corporate User - CSA":
+    include "view/corphome.php";
+    break;
+case "Technician - Team Lead":
+    include 'view/techhome.php';
     break;
 case "Technician":
     include 'view/techhome.php';

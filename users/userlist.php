@@ -1,6 +1,6 @@
 <?php include '../view/header.php';
 
-if ($_SESSION['user_role'] != 'Corporate') {
+if ($_SESSION['user_role'] != 'Corporate User - Manager' AND $_SESSION['user_role'] != 'Corporate User - SysAdmin') {
     header('Location: /index.php');
 }
 
@@ -41,7 +41,7 @@ if ($_SESSION['user_role'] != 'Corporate') {
         </tr>
     <?php endforeach;?>
 </table>
-<a href="/users/index.php?action=createAccount" class="left"><button type="button">+</button>Create Account</a>
+<!-- depreciated <a href="/users/index.php?action=createAccount" class="left"><button type="button">+</button>Create Account</a> -->
 </div>
 </div>
 </section>

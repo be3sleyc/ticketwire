@@ -1,3 +1,4 @@
+<!-- This page is depreciated -->
 <?php include '../view/header.php'?>
 
 <script>
@@ -23,7 +24,7 @@ function showPassword() {
     <div class="gitem-left"></div><div class="gitem-right"><input type="checkbox" name="chngPasswd"><label>Change password on next login:</label></div>
     <div class="gitem-left"><label>User Role:</label></div><div class="gitem-right"><select name="userRole">
         <?php foreach ($roles as $role): ?>
-        <option value="<?=$role['RoleID']?>"><?=$role['RoleName']?></option>
+        <option value="<?=$role['UserRoles']?>"><?=$role['UserRoles']?></option>
         <?php endforeach; ?>
     </select></div>
     <div class="gitem-left"></div><div class="gitem-right"><input type="submit" value="Submit"></div>

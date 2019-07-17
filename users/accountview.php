@@ -2,7 +2,7 @@
 <section>
     <div class="sectionContent">
     <h2>Account Details</h2>
-    <?php if ($_SESSION['user_role'] == 'Corporate' && ISSET($lookup_user)): ?>
+    <?php if (($_SESSION['user_role'] == 'Corporate User - SysAdmin' OR $_SESSION['user_role'] == 'Corporate User - Manager') && ISSET($lookup_user)): ?>
             <form action="updateUser" method="POST" name="updateUser" id="updateUserFrom">
                 <label>First Name: </label><input type="text" name="firstName" id="firstName" value="<?=$lookup_user['FirstName'];?>"><br>
                 <label>Last Name: </label><input type="text" name="lastName" id="lastName" value="<?=$lookup_user['LastName'];?>"><br>
