@@ -12,13 +12,32 @@
                 <a href=""><button>Reset Password</button></a>
                 <button type="submit" id="save" disabled="">Save Changes</button>
             </form>
-    <?php else: 
-        echo "First Name: " . $_SESSION['first_name'] . "<br>";
-        echo "Last Name: " . $_SESSION['last_name'] . "<br>";
-        echo "Email Address: " . $_SESSION['email'] . "<br>";
-        echo "Phone Number: " . $_SESSION['phone'] . "<br>";
-        echo "Role: " . $_SESSION['user_role'] . " since 2007";  
-    endif; ?>
+    <?php else: ?>
+        <form action="updateUser" method="POST" name="updateUser" id="updateUserFrom">
+            <label>First Name: </label><input type="text" name="firstName" id="firstName" value="<?=$_SESSION['first_name'];?>"><br>
+            <label>Last Name: </label><input type="text" name="lastName" id="lastName" value="<?=$_SESSION['last_name'];?>"><br>
+            <label>Email Address: </label><input type="email" name="emailAddress" id="emailAddress" value="<?=$_SESSION['email'];?>"><br>
+            <label>Phone Number: </label><input type="text" name="phoneNumber" id="phoneNumber" value="<?=$_SESSION['phone'];?>"><br>
+            <a href=""><button>Reset Password</button></a>
+            <input type="submit" id="save" disabled="" value="Save Changes">
+        </form> 
+   <?php endif; ?>
     </div>
 </section>
+<script src="../scripts/jquery.js"></script>
+<script>
+$('form')
+.each(function(){
+    $(this).data('serialized', $(this).serialize())
+})
+.on('change input', function(){
+    $(this) // changes submit buttons and inputs            
+        .find('input:submit')
+            .attr('disabled', $(this).serialize() == $(this).data('serialized'))
+    ;
+ })
+.find('input:submit')
+    .attr('disabled', true)
+;
+</script>
 <?php include '../view/footer.php'; ?>

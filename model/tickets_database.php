@@ -33,14 +33,4 @@ function get_ticket($user) {
     $ticket = sqlsrv_fetch_array( $statement );
     return $ticket;
 }
-
-function getCustomers() {
-    $customers = array();
-    return $customers;
-}
-
-function getTechnicians() {
-    $technicians = array();
-    return $technicians;
-}
 ?>

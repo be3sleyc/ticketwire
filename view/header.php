@@ -13,6 +13,7 @@
 <head>
     <title>Ticketwire</title>
     <link rel="stylesheet" type="text/css" href="../design/core.css">
+    <link rel="icon" type="image/png" href="../images/favicon.png">
 </head>
 
 <body>

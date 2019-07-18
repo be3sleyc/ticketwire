@@ -6,6 +6,7 @@
 body{
 	background-color: #ffffff; 
 	font-family: "DIN OT", 'Courier New', Courier, monospace;
+	min-width: 350px;
 }
 
 body.login {
@@ -205,4 +206,26 @@ td.link {
 
 a#forgot {
 	color: #fff;
+}
+
+textarea {
+	resize: none;
+}
+
+.question {
+	font-weight: bold;
+}
+
+.answer {
+	text-align: justify;
+}
+
+div.faq {
+	width: 50%;
+	min-width: 300px;
+	margin: auto;
+}
+
+ul.faqlinks {
+	text-align: left;
 }
