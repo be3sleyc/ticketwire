@@ -140,7 +140,7 @@ p.Ticketwire-copyright {
 div.list {
 	margin: auto;
 	padding: 20px;
-	width: 600px;
+	width: 800px;
 	background-color: #00aae8;
 }
 
@@ -163,7 +163,7 @@ div.list td {
 	text-align: left;
 }
 
-button {
+button, input[type=button], input[type=submit] {
 	font-weight: bolder;
 }
 
@@ -228,4 +228,45 @@ div.faq {
 
 ul.faqlinks {
 	text-align: left;
+}
+
+a:link#cancel {
+	text-decoration: none;
+}
+a:hover#cancel {
+	text-decoration: none;
+}
+a:visited#cancel {
+	text-decoration: none;
+}
+a:active#cancel {
+	text-decoration: none;
+}
+
+div.grid-container {
+	display: grid;
+	grid-template-columns: auto auto;
+	margin:auto;
+	width: 800px;
+}
+
+div.grid-left {
+	text-align: left;
+	width: 50%;
+  	margin: 0 auto;
+}
+
+div.grid-right {
+	text-align: left;
+	margin: 0 auto;
+}
+
+div.subcontainer {
+	display:grid;
+	grid-template-columns: auto auto;
+	height: 89px;
+}
+
+div.subleft {
+	grid-row: 1 / span 2;
 }

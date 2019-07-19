@@ -12,6 +12,7 @@ function login($email, $password) {
     }
 
     $user = sqlsrv_fetch_array( $statement );
+    
     return $user;
 }
 
@@ -109,6 +110,20 @@ function getCustomer($UserID) {
 
     $customer = sqlsrv_fetch_array( $statement );
     return $customer;
+}
+
+function getTechnician($UserID) {
+    global $connection;
+    $technician = null;
+    $query = "EXEC uspFetchTechnician @UserID = ?";
+    $params = array( $UserID );
+    $statement = sqlsrv_query( $connection, $query, $params );
+    if ( $statement === false ) {
+        die( print_r( sqlsrv_errors(), true ) );
+    }
+
+    $technician = sqlsrv_fetch_array( $statement );
+    return $technician;
 }
 
 ?>

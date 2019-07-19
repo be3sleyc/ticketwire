@@ -7,21 +7,15 @@ if( isset($_POST['UserID']) ) {
 }
 
 $pattern = '/(\w{3})(\w{3})(\w{4})/';
-$replace = '($1)$2-$3';
+$replace = '($1) $2-$3';
 
 if($customer !== null) {
-    echo "<label for='customerEmail'>Email:</label>";
-    echo "<input type='text' name='customerEmail' id='customerEmail' size='30' value=" . $customer['Email'] . " readonly><br>";
-    echo "<label for='customerPhone'>Phone:</label>";
-    echo "<input type='text' name='customerPhone' id='customerPhone'  size='13' value=" . preg_replace( $pattern, $replace, $customer['Phone'] ) . " readonly><br>";
-    echo "<label for='customerStreet'>Street Address:</label>";
-    echo "<input type='text' name='customerStreet' id='customerStreet' value=" . $customer['StreetAddr'] . " readonly><br>";
-    echo "<input type='text' name='customerCity' id='customerCity' value=" . $customer['City'] . " readonly>,&nbsp;";
-    echo "<input type='text' name='customerState' id='customerState' size='2' value=" . $customer['State'] . " readonly>&nbsp;";
-    echo "<input type='text' name='customerZIP' id='customerZIP' size='5' value=" . $customer['ZIPCode'] . " readonly><br>";
-    echo "<label for='customerRegion'>Region:</label>";
-    echo "<input type='text' name='customerRegion' id='customerRegion' value=" . $customer['RegionName'] . " readonly><br>";
-    echo "<label for='customerVIP'>VIP Status:</label>";
-    echo "<input type='text' name='customerVIP' id='customerVIP' size='1' value=" . $customer['VIP'] . " readonly><br>";
+    echo "<label for='customerEmail'>Email:&nbsp;" . $customer['Email'] . "</label><br>";
+    echo "<label for='customerPhone'>Phone:&nbsp;" . preg_replace( $pattern, $replace, $customer['Phone'] ) . "</label><br>";
+    echo "<label for='customerStreet'>Street Address:&nbsp;" . $customer['StreetAddr'] . "</label><br>";
+    echo "<label for='customerCityState'>City, State:&nbsp;" . $customer['City'] . ", " . $customer['State'] . "</label><br>";
+    echo "<label for='customerZipcode'>Zip Code:&nbsp;" . $customer['ZIPCode'] . "</label><br>";
+    echo "<label for='customerRegion'>Region:&nbsp;" . $customer['RegionName'] . "</label><br>";
+    echo "<label for='customerVIP'>VIP Status:&nbsp;" . ($customer['VIP'] ? 'Yes' : 'No') . "</label><br>";
 }
 ?>

@@ -40,17 +40,17 @@ if ($action == 'login') {
         header("Location: /login.php?errors=Invalid Credentials");
         exit();
     } else {
-        $_SESSION['first_name'] = $user[0];
-        $_SESSION['last_name'] = $user[1];
-        $_SESSION['email'] = $user[2];
-        $_SESSION['phone'] = $user[3];
-        $_SESSION['user_role'] = $user[4];
-        if ($user[5] == NULL) {
+        $_SESSION['UserID'] = $user[0];
+        $_SESSION['first_name'] = $user[1];
+        $_SESSION['last_name'] = $user[2];
+        $_SESSION['email'] = $user[3];
+        $_SESSION['phone'] = $user[4];
+        $_SESSION['user_role'] = $user[5];
+        if ($user[6] == NULL) {
             $_SESSION['profile_path'] = 'default.png';
         } else {
-            $_SESSION['profile_path'] = $user[5];
+            $_SESSION['profile_path'] = $user[6];
         }
-        var_dump($user);
         header('Location: /index.php'); //TODO
         exit();
     }
@@ -68,6 +68,11 @@ if ($action == 'login') {
 } elseif ($action == 'createAccount') {
     $roles = get_UserRoles();
     include 'createaccount.php';
+} elseif ($action == 'updateUser') {
+    $firstName = filter_input(INPUT_POST, 'firstName');
+    $lastName = filter_input(INPUT_POST, 'lastName');
+    $email = filter_input(INPUT_POST, 'emailAddress');
+    $phone = filter_input(INPUT_POST, 'phoneNumber');
 } else {
     // R&D needed to fill out this use case
 }

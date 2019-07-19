@@ -33,4 +33,31 @@ function get_ticket($user) {
     $ticket = sqlsrv_fetch_array( $statement );
     return $ticket;
 }
+
+function create_ticket($corpID, $techID, $custID, $subject, $description, $priority) {
+    // returns status, 0=OK, -1=Error
+    global $connection;
+    $ticketID = 0;
+    if (ISSET($techID)) {
+        $query = "EXEC uspCreateTicketwithTech @TechID = ?, @CustID = ?, @corpID = ?, @Priority = ?, @TickSubject = ?, @TickDescription = ?";
+        $params = array( $techID, $custID, $corpID, $priority, $subject, $description );
+    } else {
+        $query = "EXEC uspCreateTicket @CustID = ?, @corpID = ?, @Priority = ?, @TickSubject = ?, @TickDescription = ?";
+        $params = array( $custID, $corpID, $priority, $subject, $description );
+    }
+    
+    $statement = sqlsrv_query( $connection, $query, $params );
+    if ( $statement === false ) {
+        die( print_r( sqlsrv_errors(), true ) );
+    }
+
+    $query2 = "EXEC uspLastInsertedTicket";
+    $statement2 = sqlsrv_query( $connection, $query2 );
+    if ( $statement2 === false ) {
+        die( print_r( sqlsrv_errors(), true ) );
+    }
+
+    $ticket = sqlsrv_fetch_array( $statement2 );
+    return $ticket[0];
+}
 ?>
