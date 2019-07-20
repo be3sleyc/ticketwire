@@ -4,6 +4,10 @@ require('database_connection.php');
 function login($email, $password) {
     global $connection;
     $user = '';
+    // check if account is locked before logging in
+    if (checkLockStatus($email)) {
+        return 'Locked';
+    }
     $query = "EXEC uspLogIn @email = ?, @password = ?";
     $params = array( $email, $password );
     $statement = sqlsrv_query( $connection, $query, $params );
@@ -14,6 +18,24 @@ function login($email, $password) {
     $user = sqlsrv_fetch_array( $statement );
     
     return $user;
+}
+
+function checkLockStatus($email) {
+    global $connection;
+    $locked = null;
+    $query = "EXEC uspCheckLock @email = ?";
+    $params = array( $email );
+    $statement = sqlsrv_query( $connection, $query, $params );
+    if ( $statement === false ) {
+        die( print_r( sqlsrv_errors(), true ) );
+    }
+
+    $locked = sqlsrv_fetch_array( $statement );
+    return $locked[0];
+}
+
+function unlockAccount($email) {
+// TODO
 }
 
 function get_users() {
@@ -126,4 +148,41 @@ function getTechnician($UserID) {
     return $technician;
 }
 
+function editAccount($UserID, $firstName, $lastName, $email, $phone) {
+    global $connection;
+    $message = 'notset';
+    $phone = preg_replace('/[+-]/','',$phone);
+    $query = "EXEC uspEditUser @UserID = ?, @FirstName = ?, @LastName = ?, @EmailAddress = ?, @PhoneNumber = ?";
+    $params = array($UserID, $firstName, $lastName, $email, $phone);
+    $statement = sqlsrv_query( $connection, $query, $params );
+    if ( $statement === false ) {
+        die( print_r( sqlsrv_errors(), true ) );
+    }
+
+    $updatedRows = sqlsrv_rows_affected($statement);
+    
+    if ( $updatedRows >= 1 ) {
+        $message = 'Account updated successfully';
+    } else {
+        $message = 'Error updating account';
+    }
+
+    return $message;
+}
+
+function editCustomer($UserID) {
+// TODO
+}
+
+function editTechnician($UserID) {
+// TODO
+}
+
+function disableAccount($UserID) {
+// TODO
+}
+
+function enableAccount($UserID) {
+// TODO
+}
 ?>

@@ -1,6 +1,14 @@
-﻿@font-face {
+﻿/* Fonts */
+@font-face {
 	font-family: "DIN OT";
 	src: url(fonts/DINOT-Light.otf);
+}
+
+/* Image */
+.avatar {
+	border-radius: 50%;
+	vertical-align: middle;
+	margin-right: 5px;
 }
 
 body{
@@ -22,12 +30,6 @@ header {
 	height: 54px;
 	color: #ffffff;
 	background-color: #002554;
-}
-
-.avatar {
-	border-radius: 50%;
-	vertical-align: middle;
-	margin-right: 5px;
 }
 
 footer {
@@ -94,6 +96,14 @@ ul.menu_banner li a, .dropdown {
 	padding: 1px;
 	text-decoration: none;
 	color: white;
+}
+
+ul.footer_banner li a:hover {
+	color: #000;
+}
+
+ul.header_banner li a:hover {
+	border: 0px #000 inset;
 }
 
 ul.menu_banner div.right, ul.menu_banner li.right {
@@ -206,6 +216,11 @@ td.link {
 
 a#forgot {
 	color: #fff;
+	text-decoration: none;
+}
+
+#forgot, #welcome {
+	font-weight: bold;
 }
 
 textarea {
@@ -269,4 +284,13 @@ div.subcontainer {
 
 div.subleft {
 	grid-row: 1 / span 2;
+}
+
+a {
+	color: #000;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #186F9E;
 }
