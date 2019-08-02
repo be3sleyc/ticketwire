@@ -1,7 +1,7 @@
 <?php
 require('database_connection.php');
 
-function get_tickets(){
+function get_tickets_all(){
     #For Admins (Sys and Managers Not CSAs?) Only
     global $connection;
     $tickets = array();
@@ -19,23 +19,44 @@ function get_tickets(){
     return $tickets;
 }
 
-function get_ticket($user) {
-    #Returns ticket based on user ID and Role
+function get_tickets($user) {
+    #Returns tickets based on user ID and Role
     global $connection;
-    $ticket = array();
-    $query = "EXEC uspFetchTicket @UserID = ? @UserRole = ?";
+    $tickets = array();
+    $query = "EXEC uspFetchTickets @UserID = ?, @UserRole = ?";
     $params = array( $user['UserID'], $user['UserRole'] );
     $statement = sqlsrv_query( $connection, $query, $params );
     if ( $statement === false ) {
         die( print_r( sqlsrv_errors(), true ) );
     }
 
-    $ticket = sqlsrv_fetch_array( $statement );
-    return $ticket;
+    while ( $row = sqlsrv_fetch_array( $statement, SQLSRV_FETCH_ASSOC ) ) {
+        array_push($tickets, $row);
+    }
+
+    return $tickets;
+}
+
+function get_team_tickets($TeamID) {
+    #Returns tickets based on a team id
+    global $connection;
+    $tickets = array();
+    $query = "EXEC uspFetchTeamTickets @TeamID = ?";
+    $params = array($TeamID);
+    $statement = sqlsrv_query($connection, $query, $params);
+    if ( $statement === false ) {
+        die( print_r( sqlsrv_errors(), true ) );
+    }
+
+    while ( $row = sqlsrv_fetch_array( $statement, SQLSRV_FETCH_ASSOC ) ) {
+        array_push($tickets, $row);
+    }
+    
+    return $tickets;
+
 }
 
 function create_ticket($corpID, $techID, $custID, $subject, $description, $priority) {
-    // returns status, 0=OK, -1=Error
     global $connection;
     $ticketID = 0;
     if (ISSET($techID)) {

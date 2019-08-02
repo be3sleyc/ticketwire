@@ -5,10 +5,11 @@ if ($_SESSION['user_role'] != 'Corporate User - Manager' AND $_SESSION['user_rol
 }
 
 ?>
+<script src="/scripts/jquery.js"></script>
 <script>$('*[data-href]').on("click",function(){window.location = $(this).data('href');return false;});$("td > a").on("click",function(e){e.stopPropagation();});</script>
 
 <section>
-<div>
+<div class='sectionContent'>
     <h2>All Users</h2>
     <div class="list">
         <table>
@@ -25,8 +26,7 @@ if ($_SESSION['user_role'] != 'Corporate User - Manager' AND $_SESSION['user_rol
                     <td class="link"><a href="../users/index.php?action=viewAccount&email=<?=$user['EmailAddress']?>"><?=$user['FirstName']?></a></td>
                     <td class="link"><a href="../users/index.php?action=viewAccount&email=<?=$user['EmailAddress']?>"><?=$user['LastName']?></a></td>
                     <td class="link"><a href="../users/index.php?action=viewAccount&email=<?=$user['EmailAddress']?>"><?php 
-                            preg_match( "/(\w{3})(\w{3})(\w{4})/", $user['PhoneNumber'], $matches );
-                            echo '(' . $matches[1] . ') ' . $matches[2] . '-' . $matches[3];
+                            echo preg_replace( "/(\w{3})(\w{3})(\w{4})/", "($1) $2-$3",$user['PhoneNumber']);
                         ?></a>
                     </td>
                     <td class="link"><a href="../users/index.php?action=viewAccount&email=<?=$user['EmailAddress']?>"><?=$user['UserRole']?></a></td>

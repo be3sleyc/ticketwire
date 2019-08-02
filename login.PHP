@@ -27,7 +27,7 @@
                 <?php if ( $errors != '' ): echo "<br/><br/>"; endif; ?>
                 </div>
                 <input name="submit" type="submit" value="submit" /><br /><br/>
-                <a id="forgot" href="passwordreset.php?source=forgot" target="_blank">Forgot Password?</a>  
+                <a id="forgot" href="passwordreset.php?source=forgot">Forgot Password?</a>  
                 <!--TODO: create password recovery page -->
             </form>
         </div>

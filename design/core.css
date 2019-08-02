@@ -4,24 +4,30 @@
 	src: url(fonts/DINOT-Light.otf);
 }
 
-/* Image */
+* {
+	box-sizing: border-box;
+  }
+
+/* Images */
+img {
+	max-width: 100%;
+}
+
 .avatar {
 	border-radius: 50%;
 	vertical-align: middle;
 	margin-right: 5px;
+	border: 1px solid #002554;
 }
 
+/* General Tags */
 body{
 	background-color: #ffffff; 
 	font-family: "DIN OT", 'Courier New', Courier, monospace;
 	min-width: 350px;
 }
 
-body.login {
-	background-color: #00aae8;
-}
-
-header {
+nav {
 	position: fixed;
 	left: 0px;
 	top: 0px;
@@ -47,22 +53,43 @@ section {
 	position: fixed;
 	left: 0px;
 	top: 59px;
-	bottom: 60px;
+	bottom: 50px;
 	width: 100%;
-	margin: 0px;
+	margin: 0px 0px 10px 0px;
 	overflow: auto;
 	text-align: center;
+	z-index: -1;
 }
 
-#head-title {
-	font-size: 32pt;
-	vertical-align: top;
-	color: #ffffff;
+h3 {
+	margin-top:0px;
 }
 
-div.sectionContent {
-	display: inline-block;
-	text-align: left;
+/* Links: a tags */
+
+a {
+	color: #000;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #186F9E;
+}
+
+.sectionContent a {
+	padding: 5px;
+	border-radius: 5px;
+	border: 1px solid black;
+}
+
+/* Submit and general buttons */
+button, input[type=button], input[type=submit] {
+	font-weight: bolder;
+}
+
+/* specific to login page */
+body.login {
+	background-color: #00aae8;
 }
 
 .loginFormDiv {
@@ -79,54 +106,58 @@ div.sectionContent {
 	border-radius: 25px;	
 }
 
-ul.menu_banner {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-	overflow: hidden;
+/* specific to navigation bar */
+#head-title {
+	font-size: 32pt;
+	vertical-align: top;
+	color: #ffffff;
 }
 
-ul.menu_banner li {
-	float: left;
+#head-title:hover {
+	color: #bbbbbb;
 }
 
-ul.menu_banner li a, .dropdown {
-	display: inline-block;
-	text-align: center;
-	padding: 1px;
+div.menu_nav {
+	position: absolute;
+	width: 100%;
+}
+
+div.right {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+}
+
+div.left {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+}
+
+ul.footer_menu_banner div li {
+	display: inline;
+	padding: 5px 5px;
+}
+
+ul.footer_menu_banner div li a {
 	text-decoration: none;
-	color: white;
+	color: #ffffff;
 }
 
-ul.footer_banner li a:hover {
-	color: #000;
+ul.footer_menu_banner div li a:hover {
+	color: #4b4b4b;
 }
 
-ul.header_banner li a:hover {
-	border: 0px #000 inset;
+ul.footer_menu_banner {
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px;
 }
 
-ul.menu_banner div.right, ul.menu_banner li.right {
-	float: right;	
-}
-
-div.right li.right {
-	float: left;
-}
-
-header ul.menu_banner div.right {
-	height: 54px;
-	line-height: 54px;
-}
-
-div.right span {
-	vertical-align: middle;
-	line-height: normal;
-	display: inline-block;
-}
-.left {
-	float: left;
-}
+p.Ticketwire-copyright {
+	text-align: center;
+	width: 100%;
+   }
 
 div.bar {
 	position: fixed;
@@ -135,11 +166,18 @@ div.bar {
 	width: 100%;
 	height: 5px;
 	background-color: #00aae8;
+	z-index: -1;
 }
 
-p.Ticketwire-copyright {
- text-align: center;
- margin: 0px;	
+.ticketlink{  
+	margin: auto;
+	width: 11%;
+	border-collapse: collapse;
+}
+
+div.sectionContent {
+	display: inline-block;
+	text-align: left;
 }
 
 .errors {
@@ -147,6 +185,7 @@ p.Ticketwire-copyright {
 	text-shadow: 1px 0px #000000;
 }
 
+/* formating for lists */
 div.list {
 	margin: auto;
 	padding: 20px;
@@ -173,18 +212,16 @@ div.list td {
 	text-align: left;
 }
 
-button, input[type=button], input[type=submit] {
-	font-weight: bolder;
-}
-
-.newAccount {
+/* .newAccount {
 	display: grid;
 	grid-template-columns: auto auto;
 	background-color: #00aae8;
 	padding: 10px;
 	width: 600px;
 	margin: auto;
-}
+} */
+
+/* CSS grid used on the account view page */
 
 .gitem-right, .gitem-left {
 	padding: 5px;
@@ -227,6 +264,8 @@ textarea {
 	resize: none;
 }
 
+/* Help Page */
+
 .question {
 	font-weight: bold;
 }
@@ -244,6 +283,8 @@ div.faq {
 ul.faqlinks {
 	text-align: left;
 }
+
+/* Cancel link*/
 
 a:link#cancel {
 	text-decoration: none;
@@ -286,11 +327,83 @@ div.subleft {
 	grid-row: 1 / span 2;
 }
 
-a {
-	color: #000;
-	text-decoration: none;
+div.AccountInfo {
+	display:grid;
+	grid-template-columns: auto auto;
+	margin: 0 auto;
+	padding: 5px;
 }
 
-a:hover {
-	color: #186F9E;
+div.genInfo, div.roleInfo {
+	padding: 5px;
+	text-align: left;
 }
+
+div.message {
+	text-align: center;
+}
+
+/* Help page top button*/
+
+#topBtn {
+	display: none; 
+	position: fixed; 
+	bottom: 10vmax;
+	right: 5vmax;
+	z-index: 1px;
+	border: none;
+	outline: none;
+	background-color: #002554;
+	color: #fff;
+	cursor: pointer;
+	padding: 10px;
+	border-radius: 10px;
+	font-size: 16px;
+}
+
+#topBtn:hover {
+	background-color: #4b4b4b;
+}
+
+/* header drop down menu */
+
+.dropdownBtn {
+	background-color: #00aae8;
+	color: white;
+	padding: 16px;
+	font-size: 16px;
+	border: none;
+	cursor: pointer;
+  }
+  
+  .dropdownBtn:hover, .dropdownBtn:focus {
+	background-color: #0088c6;
+  }
+  
+  .dropdown {
+	position: fixed;
+	display: inline-block;
+  }
+  
+  .dropdown-content {
+	display: none;
+	position: fixed;
+	top: 58px;
+	background-color: #f1f1f1;
+	min-width: 160px;
+	overflow: auto;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	z-index: 1;
+  }
+  
+  .dropdown-content a {
+	color: black;
+	padding: 12px 16px;
+	background-color: #fff;
+	text-decoration: none;
+	display: block;
+  }
+  
+  .dropdown a:hover {background-color: #ddd;}
+  
+  .show {display: block;}

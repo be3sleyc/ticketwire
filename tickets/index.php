@@ -18,12 +18,24 @@ if ($action == 'list') {
     if( ISSET($_GET['status']) ) {
         $status = filter_input(INPUT_GET, 'status');
     }
-
     # lists all tickets
     # should be different for each account: 
         # corp users see all
         # tech team leads see teams
         # tech and customer sees own.
+
+    $user = array('UserID'=> $_SESSION['user_id'],'UserRole'=>$_SESSION['user_role']);
+
+    if (substr($_SESSION['user_role'],0,9) == 'Corporate' ) {
+        $tickets = get_tickets_all();
+        include "ticketview.php";
+    } elseif (ISSET($_GET['team']) ) {
+        $tickets = get_team_tickets($_SESSION['team_id']);
+        include "ticketview.php";
+    } else {
+        $tickets = get_tickets($user);
+        include "ticketview.php";
+    }
 
 } elseif ($action == 'privateview') {
     if( ISSET($_GET['status']) && ISSET($_GET['ticketID']) ) {

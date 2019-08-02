@@ -35,10 +35,14 @@ function checkLockStatus($email) {
 }
 
 function unlockAccount($email) {
-// TODO
+    // TODO
 }
 
-function get_users() {
+function getLockedAccounts() {
+    //TODO
+}
+
+function getUsers() {
     global $connection;
     $users = array();
     $query = "EXEC uspFetchAllUsers;";
@@ -55,7 +59,7 @@ function get_users() {
     return $users;
 }
 
-function get_user($email) {
+function getUser($email) {
     global $connection;
     $user = '';
     $query = "EXEC uspFetchUser @email = ?";
@@ -69,7 +73,7 @@ function get_user($email) {
     return $user;
 }
 
-function get_UserRoles() {
+function getUserRoles() {
     global $connection;
     $roles = array();
     $query = "EXEC uspFetchRoles";
@@ -120,6 +124,23 @@ function getTechnicians() {
     return $technicians;
 }
 
+function getCorporates() {
+    global $connection;
+    $corporates = array();
+    $query = "EXEC uspFetchCorporateUsers";
+    $statement = sqlsrv_query( $connection, $query );
+    
+    if ( $statement === false ) {
+        die( print_r( sqlsrv_errors(), true ) );
+    }
+
+    while ( $row = sqlsrv_fetch_array( $statement, SQLSRV_FETCH_ASSOC ) ) {
+        array_push($corporates, $row);
+    }
+
+    return $corporates;
+}
+
 function getCustomer($UserID) {
     global $connection;
     $customer = null;
@@ -148,6 +169,156 @@ function getTechnician($UserID) {
     return $technician;
 }
 
+function getCorporate($UserID) {
+    global $connection;
+    $corporate = null;
+    $query = "EXEC uspFetchCorporateUser @UserID = ?";
+    $params = array( $UserID );
+    $statement = sqlsrv_query( $connection, $query, $params );
+    if ( $statement === false ) {
+        die( print_r( sqlsrv_errors(), true ) );
+    }
+
+    $corporate = sqlsrv_fetch_array( $statement );
+    return $corporate;
+}
+
+function getSkills() {
+    global $connection;
+    $skills = array();
+    $query = "EXEC uspFetchSkills";
+    $statement = sqlsrv_query( $connection, $query);
+    if ( $statement === false ) {
+        die( print_r( sqlsrv_errors(), true ) );
+    }
+
+    while ( $row = sqlsrv_fetch_array( $statement, SQLSRV_FETCH_ASSOC ) ) {
+        array_push($skills, $row);
+    }
+
+    return $skills;
+}
+
+function getTeams() {
+    global $connection;
+    $teams = array();
+    $query = "EXEC uspFetchTeams";
+    $statement = sqlsrv_query( $connection, $query);
+    if ( $statement === false ) {
+        die( print_r( sqlsrv_errors(), true ) );
+    }
+
+    while ( $row = sqlsrv_fetch_array( $statement, SQLSRV_FETCH_ASSOC ) ) {
+        array_push($teams, $row);
+    }
+    
+    return $teams;
+}
+
+function getTeamLead($teamID) {
+    global $connection;
+    $teamlead = null;
+    $query = "EXEC uspFetchTeamLead @TeamID = ?";
+    $params = array($teamID);
+    $statement = sqlsrv_query( $connection, $query, $params );
+    if ( $statement === false ) {
+        die( print_r( sqlsrv_errors(), true ) );
+    }
+
+    $teamlead = sqlsrv_fetch_array($statement);
+    return $teamlead;
+}
+
+function getRegionByZip($ZIPCode) {
+    global $connection;
+    $region = '';
+
+    $query = "EXEC uspGetRegionByZip @ZipCode = ?";
+    $params = array($ZIPCode);
+    $statement = sqlsrv_query($connection, $query, $params);
+    if ( $statement === false ) {
+        die( print_r( sqlsrv_errors(), true ) );
+    }
+
+    $region = sqlsrv_fetch_array($statement);
+    return $region;
+}
+
+function getRegionByTeam($TeamID) {
+    global $connection;
+    $region = '';
+
+    $query = "EXEC uspGetRegionByTeam @TeamID = ?";
+    $params = array($TeamID);
+    $statement = sqlsrv_query($connection, $query, $params);
+    if ( $statement === false ) {
+        die( print_r( sqlsrv_errors(), true ) );
+    }
+
+    $region = sqlsrv_fetch_array($statement);
+    return $region;
+}
+
+function editCustomer($UserID, $firstName, $lastName, $email, $phone, $streetAddr, $cityState, $zipCode) {
+    global $connection;
+    $query = 'EXEC uspEditCustomer @StreetAddr = ?, @city = ?, @state = ?, @ZIP = ?';
+    $params = array();
+    $statement = sqlsrv_query($connection, $query, $params);
+    if ( $statement === false ) {
+        die( print_r( sqlsrv_errors(), true ) );
+    }
+
+    $updatedRows = sqlsrv_rows_affected($statement);
+
+    editAccount($UserID, $firstName, $lastName, $email, $phone);
+}
+
+function editTechnician($UserID, $firstName, $lastName, $email, $phone) {
+    
+    return editAccount($UserID, $firstName, $lastName, $email, $phone);
+}
+
+function editCorpUser($userID, $firstName, $lastName, $email, $phone) {
+
+    return editAccount($UserID, $firstName, $lastName, $email, $phone);
+}
+
+function corpEditCustomer($userID, $firstName, $lastName, $email, $phone, $stAddr, $citySt, $zipCode) {
+    global $connection;
+    
+    $city = preg_replace('/(.+), .+/', "$1", $cistySt);
+    $state = preg_replace('/.+, (.+)/', "$1", $cistySt);
+
+    $query = 'EXEC uspEditCustomer @StreetAddr = ?, @city = ?, @state = ?, @ZIP = ?';
+    $params = array($stAddr, $city, $state, $zipCode);
+    $statement = sqlsrv_query($connection, $query, $params);
+    if ( $statement === false ) {
+        die( print_r( sqlsrv_errors(), true ) );
+    }
+
+    $updatedRows = sqlsrv_rows_affected($statement);
+
+    editAccount($UserID, $firstName, $lastName, $email, $phone);
+}
+
+function corpEditTechnician($userID, $firstName, $lastName, $email, $phone, $skillLevel, $teamID) {
+    global $connection;
+    $query = 'EXEC uspEditTechnician @SkillLevel = ?, @TeamID = ?';
+    $params = array($skillLevel, $teamID);
+    $statement = sqlsrv_query($connection, $query, $params);
+    if ( $statement === false ) {
+        die( print_r( sqlsrv_errors(), true ) );
+    }
+
+    $updatedRows = sqlsrv_rows_affected($statement);
+
+    editAccount($UserID, $firstName, $lastName, $email, $phone);
+}
+
+function corpEditCorpUser($userID, $firstName, $lastName, $email, $phone) {
+    return editAccount($UserID, $firstName, $lastName, $email, $phone);
+}
+
 function editAccount($UserID, $firstName, $lastName, $email, $phone) {
     global $connection;
     $message = 'notset';
@@ -168,14 +339,6 @@ function editAccount($UserID, $firstName, $lastName, $email, $phone) {
     }
 
     return $message;
-}
-
-function editCustomer($UserID) {
-// TODO
-}
-
-function editTechnician($UserID) {
-// TODO
 }
 
 function disableAccount($UserID) {

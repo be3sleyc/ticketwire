@@ -14,29 +14,44 @@
     <title>Ticketwire</title>
     <link rel="stylesheet" type="text/css" href="../design/core.css">
     <link rel="icon" type="image/png" href="../images/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 </head>
 
 <body>
-    <header>
-    <div class="menu_banner_div">
-      <ul class="header_banner menu_banner">
-        <li>
-          <a href="/index.php"><img src="../images/ticket_100_90.png" alt="ticketwire logo">
-          <span id='head-title'>Ticketwire</span></a>
-        </li>
-        <div class="right">
-          <span>
-            <li class="right">
-              <a href="../users/index.php?action=viewAccount" title="View Account"><img class="avatar" src="<?="../images/avatar/" . $_SESSION['profile_path'];?>" alt="User Profile Picture"><?=$_SESSION['first_name'] . " " . $_SESSION['last_name'];?></a>&nbsp;&nbsp;
-            </li>
-            <li class="right">
-              <a href="../logout.php">
-                <button>Logout</button>
-              </a>
-            </li>
-          </span>
+    <nav>
+    <div class="menu_nav">
+        <a class="home" href="/index.php">
+          <img src="../images/ticket_100_90.png" alt="ticketwire logo">
+          <span id='head-title'>Ticketwire</span>
+        </a>
+        <div class="right dropdown">
+          <button onclick="showMenu()" class="dropdownBtn">
+            <img class="avatar" src="<?="../images/avatar/" . $_SESSION['profile_path'];?>" alt="User Profile Picture">
+            <?=$_SESSION['first_name'] . " " . $_SESSION['last_name'];?>
+          </button>
+          <div id="dropContent" class="dropdown-content">
+            <a href="../users/index.php?action=viewAccount" title="View Account">View Account</a>
+            <a href="../logout.php">Logout</a>
+          </div>
         </div>
-      </ul>
     </div>
     <div class="bar"></div>
-    </header>
+  </nav>
+    <script>
+    function showMenu() {
+      document.getElementById("dropContent").classList.toggle("show");
+    }
+
+    window.onclick = function(event) {
+      if (!event.target.matches('.dropdownBtn')) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+          var openDropdown = dropdowns[i];
+          if (openDropdown.classList.contains('show')) {
+            openDropdown.classList.remove('show');
+          }
+        }
+      }
+    }
+    </script>

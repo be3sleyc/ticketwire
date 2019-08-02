@@ -12,7 +12,7 @@ if ( strpos($_SESSION['user_role'], 'Corporate User') === false ) {
 </div>
 <form action="index.php" method="post">
 <input type="hidden" name="action" value="createdata">
-<input type="hidden" name="corp" value="<?=$_SESSION['UserID']?>">
+<input type="hidden" name="corp" value="<?=$_SESSION['user_id']?>">
 <div class="grid-container">
     <div class="grid-left">
         <div class='item'>

@@ -13,9 +13,11 @@ case "Corporate User - CSA":
     include "view/corphome.php";
     break;
 case "Technician - Team Lead":
+    $tickets = 0;
     include 'view/techhome.php';
     break;
 case "Technician":
+    $tickets = 0;
     include 'view/techhome.php';
     break;
 case "Customer":
