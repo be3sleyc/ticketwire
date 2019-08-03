@@ -28,19 +28,21 @@ if ($action == 'list') {
 
     if (substr($_SESSION['user_role'],0,9) == 'Corporate' ) {
         $tickets = get_tickets_all();
-        include "ticketview.php";
-    } elseif (ISSET($_GET['team']) ) {
+        include "ticketlistall.php";
+    } elseif (ISSET($_GET['team']) || ISSET($_POST['team']) ) {
         $tickets = get_team_tickets($_SESSION['team_id']);
-        include "ticketview.php";
+        include "ticketlistteam.php";
     } else {
         $tickets = get_tickets($user);
-        include "ticketview.php";
+        include "ticketlist.php";
     }
 
 } elseif ($action == 'privateview') {
-    if( ISSET($_GET['status']) && ISSET($_GET['ticketID']) ) {
-        $status = filter_input(INPUT_GET, 'status');
+    if( ISSET($_GET['ticketID']) ) {
         $ticketID = filter_input(INPUT_GET, 'ticketID');
+        $ticket = get_ticket($ticketID);
+        $comments = get_prcomment($ticketID);
+        include "ticketviewprivate.php";
     }
 # should include options to edit?
 # able to view all comments

@@ -6,7 +6,7 @@
 
 * {
 	box-sizing: border-box;
-  }
+}
 
 /* Images */
 img {
@@ -21,8 +21,8 @@ img {
 }
 
 /* General Tags */
-body{
-	background-color: #ffffff; 
+body {
+	background-color: #ffffff;
 	font-family: "DIN OT", 'Courier New', Courier, monospace;
 	min-width: 350px;
 }
@@ -62,7 +62,7 @@ section {
 }
 
 h3 {
-	margin-top:0px;
+	margin-top: 0px;
 }
 
 /* Links: a tags */
@@ -77,13 +77,18 @@ a:hover {
 }
 
 .sectionContent a {
+	display: inline-block;
+	margin: 5px;
 	padding: 5px;
 	border-radius: 5px;
 	border: 1px solid black;
+
 }
 
 /* Submit and general buttons */
-button, input[type=button], input[type=submit] {
+button,
+input[type=button],
+input[type=submit] {
 	font-weight: bolder;
 }
 
@@ -102,8 +107,8 @@ body.login {
 	width: 300px;
 	padding: 40px 0 40px 0;
 	text-align: center;
-	color:#ffffff;
-	border-radius: 25px;	
+	color: #ffffff;
+	border-radius: 25px;
 }
 
 /* specific to navigation bar */
@@ -157,7 +162,7 @@ ul.footer_menu_banner {
 p.Ticketwire-copyright {
 	text-align: center;
 	width: 100%;
-   }
+}
 
 div.bar {
 	position: fixed;
@@ -169,7 +174,7 @@ div.bar {
 	z-index: -1;
 }
 
-.ticketlink{  
+.ticketlink {
 	margin: auto;
 	width: 11%;
 	border-collapse: collapse;
@@ -178,6 +183,10 @@ div.bar {
 div.sectionContent {
 	display: inline-block;
 	text-align: left;
+}
+
+div.sectionContent h2 {
+	text-align: center;
 }
 
 .errors {
@@ -196,15 +205,17 @@ div.list {
 div.list table {
 	background: #ffffff;
 	margin: auto;
-	box-shadow: 3px 3px #4b4b4b 
+	box-shadow: 3px 3px #4b4b4b
 }
 
-div.list table, th, td {
+div.list table,
+th,
+td {
 	border: 1px solid black;
 	border-collapse: collapse;
 }
 
-div.list  th {
+div.list th {
 	font-weight: bold;
 }
 
@@ -223,7 +234,8 @@ div.list td {
 
 /* CSS grid used on the account view page */
 
-.gitem-right, .gitem-left {
+.gitem-right,
+.gitem-left {
 	padding: 5px;
 }
 
@@ -241,10 +253,10 @@ div.list td {
 }
 
 td a {
-display:inline-block;
-min-height: 100%;
-width: 100%;
-padding: 10px;
+	display: inline-block;
+	min-height: 100%;
+	width: 100%;
+	padding: 10px;
 }
 
 td.link {
@@ -256,12 +268,14 @@ a#forgot {
 	text-decoration: none;
 }
 
-#forgot, #welcome {
+#forgot,
+#welcome {
 	font-weight: bold;
 }
 
 textarea {
 	resize: none;
+	font-family: "DIN OT", 'Courier New', Courier, monospace;
 }
 
 /* Help Page */
@@ -288,13 +302,17 @@ ul.faqlinks {
 
 a:link#cancel {
 	text-decoration: none;
+	border: 0px;
 }
+
 a:hover#cancel {
 	text-decoration: none;
 }
+
 a:visited#cancel {
 	text-decoration: none;
 }
+
 a:active#cancel {
 	text-decoration: none;
 }
@@ -302,14 +320,12 @@ a:active#cancel {
 div.grid-container {
 	display: grid;
 	grid-template-columns: auto auto;
-	margin:auto;
-	width: 800px;
+	grid-column-gap: 0px;
 }
 
 div.grid-left {
 	text-align: left;
-	width: 50%;
-  	margin: 0 auto;
+	margin: 0 auto;
 }
 
 div.grid-right {
@@ -317,37 +333,45 @@ div.grid-right {
 	margin: 0 auto;
 }
 
-div.subcontainer {
-	display:grid;
-	grid-template-columns: auto auto;
-	height: 89px;
-}
-
-div.subleft {
-	grid-row: 1 / span 2;
-}
-
 div.AccountInfo {
-	display:grid;
+	display: grid;
 	grid-template-columns: auto auto;
 	margin: 0 auto;
 	padding: 5px;
 }
 
-div.genInfo, div.roleInfo {
+div.genInfo,
+div.roleInfo {
 	padding: 5px;
 	text-align: left;
+}
+
+div.TicketCreateButtons {
+	display: block;
+}
+
+div#technicianSummary,
+div#customerSummary {
+	margin-top: 5px;
+	background-color: #ddd;
+	border-radius: 5px;
+	border: 1px solid #fff;
+	padding: 5px;
 }
 
 div.message {
 	text-align: center;
 }
 
+form.ticketViewSelect {
+	align-content: left;
+}
+
 /* Help page top button*/
 
 #topBtn {
-	display: none; 
-	position: fixed; 
+	display: none;
+	position: fixed;
 	bottom: 10vmax;
 	right: 5vmax;
 	z-index: 1px;
@@ -374,36 +398,41 @@ div.message {
 	font-size: 16px;
 	border: none;
 	cursor: pointer;
-  }
-  
-  .dropdownBtn:hover, .dropdownBtn:focus {
+}
+
+.dropdownBtn:hover,
+.dropdownBtn:focus {
 	background-color: #0088c6;
-  }
-  
-  .dropdown {
+}
+
+.dropdown {
 	position: fixed;
 	display: inline-block;
-  }
-  
-  .dropdown-content {
+}
+
+.dropdown-content {
 	display: none;
 	position: fixed;
 	top: 58px;
 	background-color: #f1f1f1;
 	min-width: 160px;
 	overflow: auto;
-	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
 	z-index: 1;
-  }
-  
-  .dropdown-content a {
+}
+
+.dropdown-content a {
 	color: black;
 	padding: 12px 16px;
 	background-color: #fff;
 	text-decoration: none;
 	display: block;
-  }
-  
-  .dropdown a:hover {background-color: #ddd;}
-  
-  .show {display: block;}
+}
+
+.dropdown a:hover {
+	background-color: #ddd;
+}
+
+.show {
+	display: block;
+}

@@ -60,7 +60,7 @@ if ($action == 'login') {
         }
         if ( substr($user[5],0,10) == 'Technician') {
             $technician = getTechnician($_SESSION['user_id']);
-            $_SESSION['team_id'] = $technician[8];
+            $_SESSION['team_id'] = $technician[6];
         }
         header('Location: /index.php'); //TODO
         exit();

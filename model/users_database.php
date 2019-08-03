@@ -280,14 +280,14 @@ function editTechnician($UserID, $firstName, $lastName, $email, $phone) {
 
 function editCorpUser($userID, $firstName, $lastName, $email, $phone) {
 
-    return editAccount($UserID, $firstName, $lastName, $email, $phone);
+    return editAccount($userID, $firstName, $lastName, $email, $phone);
 }
 
 function corpEditCustomer($userID, $firstName, $lastName, $email, $phone, $stAddr, $citySt, $zipCode) {
     global $connection;
     
-    $city = preg_replace('/(.+), .+/', "$1", $cistySt);
-    $state = preg_replace('/.+, (.+)/', "$1", $cistySt);
+    $city = preg_replace('/(.+), .+/', "$1", $citySt);
+    $state = preg_replace('/.+, (.+)/', "$1", $citySt);
 
     $query = 'EXEC uspEditCustomer @StreetAddr = ?, @city = ?, @state = ?, @ZIP = ?';
     $params = array($stAddr, $city, $state, $zipCode);
@@ -298,7 +298,7 @@ function corpEditCustomer($userID, $firstName, $lastName, $email, $phone, $stAdd
 
     $updatedRows = sqlsrv_rows_affected($statement);
 
-    editAccount($UserID, $firstName, $lastName, $email, $phone);
+    editAccount($userID, $firstName, $lastName, $email, $phone);
 }
 
 function corpEditTechnician($userID, $firstName, $lastName, $email, $phone, $skillLevel, $teamID) {
@@ -312,11 +312,11 @@ function corpEditTechnician($userID, $firstName, $lastName, $email, $phone, $ski
 
     $updatedRows = sqlsrv_rows_affected($statement);
 
-    editAccount($UserID, $firstName, $lastName, $email, $phone);
+    editAccount($userID, $firstName, $lastName, $email, $phone);
 }
 
 function corpEditCorpUser($userID, $firstName, $lastName, $email, $phone) {
-    return editAccount($UserID, $firstName, $lastName, $email, $phone);
+    return editAccount($userID, $firstName, $lastName, $email, $phone);
 }
 
 function editAccount($UserID, $firstName, $lastName, $email, $phone) {

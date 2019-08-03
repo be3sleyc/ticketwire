@@ -1,6 +1,22 @@
 <?php
 require('database_connection.php');
 
+function get_ticket($ticketID) {
+    global $connection;
+    $ticket = array();
+    $query = "EXEC uspFetchTicket @ticketID = ?";
+    $params = array($ticketID);
+    $statement = sqlsrv_query($connection, $query, $params);
+
+    if ( $statement === false) {
+        die( print_r( sqlsrv_errors, true) );
+    }
+
+    $ticket = sqlsrv_fetch_array( $statement );
+
+    return $ticket;
+}
+
 function get_tickets_all(){
     #For Admins (Sys and Managers Not CSAs?) Only
     global $connection;
