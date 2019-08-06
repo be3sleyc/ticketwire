@@ -40,7 +40,7 @@ if (isset($_POST['OpenClosedAll'])) {
                 <th>Last Comment</th>
                 <th>Ticket Status</th>
             </tr>
-
+                
             <?php foreach ($tickets as $ticket) :
                 switch ($status) {
                     case 'All':
@@ -122,6 +122,11 @@ if (isset($_POST['OpenClosedAll'])) {
             }
         endforeach; ?>
         </table>
+        <?php 
+            if (count($tickets) == 0) {
+                echo '<p>You don\'t have any tickets</p>';
+            }
+        ?>
     </div>
 </section>
 <?php include '../view/footer.php'; ?>

@@ -13,60 +13,56 @@
 <div class="faq">
 <h3>FAQs</h3>
 <ul class="faqlinks">
-<li><a href="#ticketStatus">How do I check the status of my ticket?</a> </li>
-<li><a href="#getAccount">How do I get an account?</a></li>
-<li><a href="#missedAppointment">What do I do if my technician misses an appointment?</a></li>
-<li><a href="#billingQuestions">How do I get questions answered about my bill?</a></li>
-<li><a href="#cancelAppointment">What do I do if I need to cancel an appointment?</a></li>
+<li><a href="#createTickets">Who can create tickets?</a> </li>
+<li><a href="#closeTickets">Who can close tickets?</a></li>
+<li><a href="#accountCreation">How do I get an account created?</a></li>
+<li><a href="#openClosedTickets">Can I view open and closed tickets?</a></li>
+<li><a href="#scheduleAppointment">How are tickets scheduled?</a></li>
 <li><a href="#resetPassword">How do I reset my password?</a></li>
-<li><a href="#payBill">Can I use the app to pay my bill?</a></li>
-<li><a href="#armSystem">Can I use the app to arm my system?</a></li>
-<li><a href="#seeTickets">Where do I go to see my tickets?</a></li>
-<li><a href="#scheduleAppointment">How do I get someone to come out and service my account?</a></li>
 </ul>
 <?php if ( isset($_SESSION['email']) ):?>
-    <p>Need more infomation?</p>
+    <p><a href="<?php
+        switch (substr($_SESSION['user_role'], 0, 4)) {
+            case 'Corp':
+                echo 'https://docs.google.com/document/d/1_vGbRqnQXk5cwyTgNQs9L8YEApsIBlCtaGj4ZF-m7v0/edit?usp=sharing';
+                break;
+            case 'Tech':
+                echo 'https://docs.google.com/document/d/1vgDW_mmeADAhDmvONucMFhugihhS8NxKcbf8B-3qbzY/edit?usp=sharing';
+                break;
+            case 'Cust':
+                echo 'https://docs.google.com/document/d/1vgDW_mmeADAhDmvONucMFhugihhS8NxKcbf8B-3qbzY/edit?usp=sharing';
+                break;
+        }
+    ?>" target="_blank">Need more infomation?</a>
+    <?php if($_SESSION['user_role'] == "Corporate User - SysAdmin"):?>
+        <a href="https://docs.google.com/document/d/1LnRx329KUdBe6_ywIRQ7Vm9Uv3wZPjnL2vmwTpD1xoY/edit?usp=sharing" target="_blank">Backend Information</a>
+    <?php endif; ?>
+    </p>
 <?php endif;?>
 <button onclick="topFunction()" id="topBtn" title="Go to top">Top</button> 
-<p id="ticketStatus" class="question">How do I check the status of my ticket?</p>
+<p id="createTickets" class="question">Who can create tickets?</p>
 <p class="answer">
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sollicitudin molestie enim, quis vestibulum est semper quis. Morbi eu porttitor nibh, ac imperdiet ligula. Sed rutrum iaculis quam vitae venenatis. Vestibulum placerat lorem arcu, quis aliquet enim mollis ut. Etiam placerat risus vel metus feugiat, at posuere dolor lobortis. Pellentesque eget lectus eget ex iaculis convallis. Nunc volutpat efficitur leo, at convallis libero commodo gravida. Nulla quis justo lectus. Cras dictum lobortis molestie. Proin commodo velit id metus bibendum, id commodo risus semper. Vivamus lectus massa, tempus id vulputate vel, rhoncus non magna. Cras porttitor diam id arcu ullamcorper viverra. Sed venenatis vel elit vel ornare. Nunc sit amet gravida dolor. Nulla nec sodales eros. 
+Corporate users (call center agents) will create a ticket for a customer after they have contacted Northstar to inform us of an issue. 
 </p>
-<p id="getAccount" class="question">How do I get an account?</p>
+<p id="closeTickets" class="question">Who can close tickets?</p>
 <p class="answer">
-If you already have a service contract with Northstar Alarm or Northstar Home , contact a Northstar Customer Support Agent.
+Technicians and Corporate Users with appropriate notes/comments.
 </p>
-<p id="missedAppointment" class="question">What do I do if my technician misses an appointment?</p>
+<p id="accountCreation" class="question">How do I get an account created?</p>
 <p class="answer">
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sollicitudin molestie enim, quis vestibulum est semper quis. Morbi eu porttitor nibh, ac imperdiet ligula. Sed rutrum iaculis quam vitae venenatis. Vestibulum placerat lorem arcu, quis aliquet enim mollis ut. Etiam placerat risus vel metus feugiat, at posuere dolor lobortis. Pellentesque eget lectus eget ex iaculis convallis. Nunc volutpat efficitur leo, at convallis libero commodo gravida. Nulla quis justo lectus. Cras dictum lobortis molestie. Proin commodo velit id metus bibendum, id commodo risus semper. Vivamus lectus massa, tempus id vulputate vel, rhoncus non magna. Cras porttitor diam id arcu ullamcorper viverra. Sed venenatis vel elit vel ornare. Nunc sit amet gravida dolor. Nulla nec sodales eros. 
+When a ticket is required, Corporate sends out an email to the users. Technicians are onboarded at the time of signing up to work with Corporate.
 </p>
-<p id="billingQuestions" class="question">How do I get questions answered about my bill?</p>
+<p id="openClosedTickets" class="question">Can I view open and closed tickets?</p>
 <p class="answer">
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sollicitudin molestie enim, quis vestibulum est semper quis. Morbi eu porttitor nibh, ac imperdiet ligula. Sed rutrum iaculis quam vitae venenatis. Vestibulum placerat lorem arcu, quis aliquet enim mollis ut. Etiam placerat risus vel metus feugiat, at posuere dolor lobortis. Pellentesque eget lectus eget ex iaculis convallis. Nunc volutpat efficitur leo, at convallis libero commodo gravida. Nulla quis justo lectus. Cras dictum lobortis molestie. Proin commodo velit id metus bibendum, id commodo risus semper. Vivamus lectus massa, tempus id vulputate vel, rhoncus non magna. Cras porttitor diam id arcu ullamcorper viverra. Sed venenatis vel elit vel ornare. Nunc sit amet gravida dolor. Nulla nec sodales eros. 
+Yes, from your main ticket list view accessible from the home page or from your top right menu.
 </p>
-<p id="cancelAppointment" class="question">What do I do if I need to cancel an appointment?</p>
+<p id="scheduleAppointment" class="question">How are tickets scheduled?</p>
 <p class="answer">
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sollicitudin molestie enim, quis vestibulum est semper quis. Morbi eu porttitor nibh, ac imperdiet ligula. Sed rutrum iaculis quam vitae venenatis. Vestibulum placerat lorem arcu, quis aliquet enim mollis ut. Etiam placerat risus vel metus feugiat, at posuere dolor lobortis. Pellentesque eget lectus eget ex iaculis convallis. Nunc volutpat efficitur leo, at convallis libero commodo gravida. Nulla quis justo lectus. Cras dictum lobortis molestie. Proin commodo velit id metus bibendum, id commodo risus semper. Vivamus lectus massa, tempus id vulputate vel, rhoncus non magna. Cras porttitor diam id arcu ullamcorper viverra. Sed venenatis vel elit vel ornare. Nunc sit amet gravida dolor. Nulla nec sodales eros. 
+A technician will contact the customer to schedule a time to service or assess a system.
 </p>
 <p id="resetPassword" class="question">How do I reset my password?</p>
 <p class="answer">
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sollicitudin molestie enim, quis vestibulum est semper quis. Morbi eu porttitor nibh, ac imperdiet ligula. Sed rutrum iaculis quam vitae venenatis. Vestibulum placerat lorem arcu, quis aliquet enim mollis ut. Etiam placerat risus vel metus feugiat, at posuere dolor lobortis. Pellentesque eget lectus eget ex iaculis convallis. Nunc volutpat efficitur leo, at convallis libero commodo gravida. Nulla quis justo lectus. Cras dictum lobortis molestie. Proin commodo velit id metus bibendum, id commodo risus semper. Vivamus lectus massa, tempus id vulputate vel, rhoncus non magna. Cras porttitor diam id arcu ullamcorper viverra. Sed venenatis vel elit vel ornare. Nunc sit amet gravida dolor. Nulla nec sodales eros. 
-</p>
-<p id="payBill" class="question">Can I use the app to pay my bill?</p>
-<p class="answer">
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sollicitudin molestie enim, quis vestibulum est semper quis. Morbi eu porttitor nibh, ac imperdiet ligula. Sed rutrum iaculis quam vitae venenatis. Vestibulum placerat lorem arcu, quis aliquet enim mollis ut. Etiam placerat risus vel metus feugiat, at posuere dolor lobortis. Pellentesque eget lectus eget ex iaculis convallis. Nunc volutpat efficitur leo, at convallis libero commodo gravida. Nulla quis justo lectus. Cras dictum lobortis molestie. Proin commodo velit id metus bibendum, id commodo risus semper. Vivamus lectus massa, tempus id vulputate vel, rhoncus non magna. Cras porttitor diam id arcu ullamcorper viverra. Sed venenatis vel elit vel ornare. Nunc sit amet gravida dolor. Nulla nec sodales eros. 
-</p>
-<p id="armSystem" class="question">Can I use the app to arm my system?</p>
-<p class="answer">
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sollicitudin molestie enim, quis vestibulum est semper quis. Morbi eu porttitor nibh, ac imperdiet ligula. Sed rutrum iaculis quam vitae venenatis. Vestibulum placerat lorem arcu, quis aliquet enim mollis ut. Etiam placerat risus vel metus feugiat, at posuere dolor lobortis. Pellentesque eget lectus eget ex iaculis convallis. Nunc volutpat efficitur leo, at convallis libero commodo gravida. Nulla quis justo lectus. Cras dictum lobortis molestie. Proin commodo velit id metus bibendum, id commodo risus semper. Vivamus lectus massa, tempus id vulputate vel, rhoncus non magna. Cras porttitor diam id arcu ullamcorper viverra. Sed venenatis vel elit vel ornare. Nunc sit amet gravida dolor. Nulla nec sodales eros. 
-</p>
-<p id="seeTickets" class="question">Where do I go to see my tickets?</p>
-<p class="answer">
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sollicitudin molestie enim, quis vestibulum est semper quis. Morbi eu porttitor nibh, ac imperdiet ligula. Sed rutrum iaculis quam vitae venenatis. Vestibulum placerat lorem arcu, quis aliquet enim mollis ut. Etiam placerat risus vel metus feugiat, at posuere dolor lobortis. Pellentesque eget lectus eget ex iaculis convallis. Nunc volutpat efficitur leo, at convallis libero commodo gravida. Nulla quis justo lectus. Cras dictum lobortis molestie. Proin commodo velit id metus bibendum, id commodo risus semper. Vivamus lectus massa, tempus id vulputate vel, rhoncus non magna. Cras porttitor diam id arcu ullamcorper viverra. Sed venenatis vel elit vel ornare. Nunc sit amet gravida dolor. Nulla nec sodales eros. 
-</p>
-<p id="scheduleAppointment" class="question">How do I get someone to come out and service my account?</p>
-<p class="answer">
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sollicitudin molestie enim, quis vestibulum est semper quis. Morbi eu porttitor nibh, ac imperdiet ligula. Sed rutrum iaculis quam vitae venenatis. Vestibulum placerat lorem arcu, quis aliquet enim mollis ut. Etiam placerat risus vel metus feugiat, at posuere dolor lobortis. Pellentesque eget lectus eget ex iaculis convallis. Nunc volutpat efficitur leo, at convallis libero commodo gravida. Nulla quis justo lectus. Cras dictum lobortis molestie. Proin commodo velit id metus bibendum, id commodo risus semper. Vivamus lectus massa, tempus id vulputate vel, rhoncus non magna. Cras porttitor diam id arcu ullamcorper viverra. Sed venenatis vel elit vel ornare. Nunc sit amet gravida dolor. Nulla nec sodales eros. 
+Your password can be reset from your account details page once you have logged in. If you cannot login, you will need to call us to have a customer support assistant help you.
 </p>
 </div>
 <div class="guides">

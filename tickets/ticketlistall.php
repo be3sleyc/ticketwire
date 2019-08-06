@@ -81,6 +81,11 @@ if (isset($_POST['OpenClosedAll'])) {
             }
         endforeach; ?>
         </table>
+        <?php 
+            if (count($tickets) == 0) {
+                echo '<p>No tickets have been created, ever.</p>';
+            }
+        ?>
     </div>
 </section>
 <?php include '../view/footer.php'; ?>

@@ -25,10 +25,10 @@ header('Content-Type: text/html; charset=iso-8859-1');
         <span id='head-title'>Ticketwire</span>
       </a>
       <div class="right dropdown">
-        <button onclick="showMenu()" class="dropdownBtn">
+        <div  onclick="showMenu()" class="dropdownBtn">
           <img class="avatar" src="<?= "../images/avatar/" . $_SESSION['profile_path']; ?>" alt="User Profile Picture">
-          <?= $_SESSION['first_name'] . " " . $_SESSION['last_name']; ?>
-        </button>
+          <span id="header_user_name"><?= $_SESSION['first_name'] . " " . $_SESSION['last_name']; ?></span>
+        </div>
         <div id="dropContent" class="dropdown-content">
           <a href="../users/index.php?action=viewAccount" title="View Account">View Account</a>
           <?php switch (substr($_SESSION['user_role'], 0, 4)): case 'Corp': ?>

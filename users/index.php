@@ -69,7 +69,7 @@ if ($action == 'login') {
     $users = getUsers();
     include 'userlist.php';
 } elseif ($action == 'viewAccount') {
-    $message = '';
+    $message = filter_input(INPUT_GET, 'message');
     if ($email = filter_input(INPUT_GET, 'email')) {
         $lookup_user = getUser($email);
         include 'accountview.php';

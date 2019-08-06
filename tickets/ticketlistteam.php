@@ -81,6 +81,11 @@ if (isset($_POST['OpenClosedAll'])) {
             }
         endforeach; ?>
         </table>
+        <?php 
+            if (count($tickets) == 0) {
+                echo '<p>There are no tickets assigned to your team.</p>';
+            }
+        ?>
     </div>
 </section>
 <?php include '../view/footer.php'; ?>

@@ -1,13 +1,13 @@
 <?php include '../view/header.php'; ?>
 <section>
     <div class="sectionContent">
-        <div class="message"><?= $message ?></div>
         <?php if (($_SESSION['user_role'] == 'Corporate User - SysAdmin' or $_SESSION['user_role'] == 'Corporate User - Manager') && isset($lookup_user)) : ?>
             <h2 style="text-align:center;">Account Details:&nbsp;<?= $lookup_user['FirstName'] . ' ' . $lookup_user['LastName']; ?></h2>
             <form action=".\index.php" method="POST" name="updateUser" id="updateUserFrom">
                 <div class="AccountInfo">
                     <div class="genInfo">
                         <h3>General Information</h3>
+                        <div class="message"><?= $message ?></div>
                         <input type="hidden" name="userid" value="<?= $lookup_user['UserID'] ?>">
                         <input type="hidden" name="action" value="corpUpdateUser">
                         <img src="<?= "/images/profile/full_" . $lookup_user['AvatarFilePath'] ?>" alt="Profile picture of <?= $lookup_user['FirstName'] . ' ' . $lookup_user['LastName']; ?>"><br>
@@ -43,6 +43,7 @@
             </form>
         <?php else : ?>
             <h2 style="text-align:center;">Account Details:&nbsp;<?= $_SESSION['first_name'] . ' ' . $_SESSION['last_name']; ?></h2>
+            <div class="message"><?= $message ?></div>
             <form action=".\index.php" method="POST" name="updateUser" id="updateUserFrom">
                 <input type="hidden" name="action" value="updateUser">
                 <input type="hidden" name="userid" value="<?= $_SESSION['user_id'] ?>">

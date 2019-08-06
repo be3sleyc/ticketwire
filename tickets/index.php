@@ -55,7 +55,7 @@ if ($action == 'list') {
         include "ticketlist.php";
     }
 } elseif ($action == 'privateview') {
-    $message = '';
+    $message = filter_input(INPUT_GET, 'message');
     if (isset($_GET['ticketID'])) {
         $ticketID = filter_input(INPUT_GET, 'ticketID');
     }elseif (ISSET($_POST['ticketID'])) {
@@ -81,7 +81,7 @@ if ($action == 'list') {
 } elseif ($action == 'view') {
     # should include options to add comment?
     # public comments only
-    $message = '';
+    $message = filter_input(INPUT_GET, 'message');
     if (isset($_GET['ticketID'])) {
         $ticketID = filter_input(INPUT_GET, 'ticketID');
     }elseif (ISSET($_POST['ticketID'])) {

@@ -18,8 +18,8 @@ if (isset($_GET['message'])) {
       include 'view/public_header.php'; ?>
    <section>
       <div class="sectionContent">
-         <div class="errors"><?= $message ?></div>
          <h2>Account Recovery</h2>
+         <div class="errors"><?= $message ?></div>
          <p>Forget your password? We'll send you an email to help you reset your password. Please provide your email address associated with your ticketwire account and your date of birth.</p>
          <form action="/users/index.php" method="post">
             <input type="hidden" name="action" value="forgotLockedOut">
@@ -39,8 +39,8 @@ case 'edit':
       include 'view/header.php'; ?>
       <section>
          <div class="sectionContent">
-            <div class="errors"><?= $message ?></div>
             <h2>Password Reset</h2>
+            <div class="errors"><?= $message ?></div>
             <?php if ($userID == $_SESSION['user_id']) : ?>
                <p>Please provide your old account password and a new password.</p>
                <form action="/users/index.php" method="post">
@@ -65,8 +65,8 @@ case 'corpEdit':
       include 'view/header.php'; ?>
       <section>
          <div class="sectionContent">
-            <div class="errors"><?= $message ?></div>
             <h2>Password Reset</h2>
+            <div class="errors"><?= $message ?></div>
             <p>Reset user <?= $userID ?>'s account password</p>
             <form action="/users/index.php" method="post">
                <input type="hidden" name="action" value="corpPasswordReset">
@@ -88,8 +88,8 @@ case 'Locked':
       include 'view/public_header.php'; ?>
       <section>
          <div class="sectionContent">
-            <div class="errors"><?= $message ?></div>
             <h2>Account Recovery</h2>
+            <div class="errors"><?= $message ?></div>
             <form action="/users/index.php" method="post">
                <input type="hidden" name="action" value="forgotLockedOut">
                <input type="hidden" name="userID" value="<?= $userID ?>">

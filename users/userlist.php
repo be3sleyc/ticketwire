@@ -17,6 +17,7 @@ if ($_SESSION['user_role'] != 'Corporate User - Manager' AND $_SESSION['user_rol
                 <th>Last Name</th>
                 <th>Phone #</th>
                 <th>Role</th>
+                <th>Locked</th>
             </tr>
             <?php foreach ($users as $user): ?>
                 <tr class="userlink" onclick="document.location='/users/index.php?action=viewAccount&email=<?=$user['EmailAddress']?>';">
@@ -28,6 +29,7 @@ if ($_SESSION['user_role'] != 'Corporate User - Manager' AND $_SESSION['user_rol
                         ?>
                     </td>
                     <td><?=$user['UserRole']?></td>
+                    <td><?= ($user['Locked'] == 1) ? 'Yes' : 'No' ?></td>
                 </tr>
             <?php endforeach;?>
         </table>
