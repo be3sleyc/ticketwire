@@ -323,6 +323,11 @@ a#reset:link {
 	border: 0px;
 }
 
+a#unlock:link {
+	text-decoration: none;
+	border: 0px;
+}
+
 div.grid-container {
 	display: grid;
 	grid-template-columns: auto auto;

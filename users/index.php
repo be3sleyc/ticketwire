@@ -144,8 +144,8 @@ if ($action == 'login') {
         case 'CorpUpdateCust':
             $stAddr = filter_input(INPUT_POST, 'streetAddress');
             $citySt = filter_input(INPUT_POST, 'CityState');
-            $cityState = explode(', ', $citySt); 
-            if (count($cityState) == 2 ) {
+            $cityState = explode(', ', $citySt);
+            if (count($cityState) == 2) {
                 $city = $cityState[0];
                 $state = $cityState[1];
             } else {
@@ -171,6 +171,55 @@ if ($action == 'login') {
     $lookup_user = getUser($email);
     include 'accountview.php';
     exit;
-} else {
-    // R&D needed to fill out this use case
+} elseif ($action == 'userPasswordReset') {
+    $source = filter_input(INPUT_POST, "source");
+    $userID = filter_input(INPUT_POST, "userID");
+    $oldPassword = filter_input(INPUT_POST, "oldpassword");
+    $newPassword = filter_input(INPUT_POST, "newpassword");
+    $newPassword2 = filter_input(INPUT_POST, "new2password");
+
+    if ($newPassword != $newPassword2) {
+        $message = "Candidate passwords do not match.";
+        header("Location: /passwordreset.php?source=" . $source . "&userid=" . $userID . "&message=" . $message);
+        exit();
+    } else {
+        $message = reset_password($userID, $oldPassword, $newPassword);
+        $message = ($message == 1) ? 'Password changed successfully' : 'Error changing password';
+        header("Location: /users/index.php?action=viewAccount&message=" . $message);
+        exit();
+    }
+} elseif ($action == 'corpPasswordReset') {
+    $source = filter_input(INPUT_POST, "source");
+    $userID = filter_input(INPUT_POST, "userID");
+    $email = filter_input(INPUT_POST, "email");
+    $newPassword = filter_input(INPUT_POST, "newpassword");
+    $newPassword2 = filter_input(INPUT_POST, "new2password");
+
+    if ($newPassword != $newPassword2) {
+        $message = "Candidate passwords do not match.";
+        header("Location: /passwordreset.php?source=" . $source . "&userid=" . $userID . "&message=" . $message);
+        exit();
+    } else {
+        $message = reset_password($userID, $oldPassword, $newPassword);
+        $message = ($message == 1) ? 'Password changed successfully' : 'Error changing password';
+        header("Location: /users/index.php?action=viewAccount&email=". $email . "message=" . $message);
+        exit();
+    }
+
+} elseif ($action == 'forgotLockedOut') {
+    $source = filter_input(INPUT_POST, "source");
+    $userID = filter_input(INPUT_POST, "userID");
+    $r = filter_input(INPUT_POST, "recoveryEmail");
+    $dob = filter_input(INPUT_POST, "recoverydob");
+
+    $message = "Email function is not setup. Please call us to reset your account.";
+    header("Location: /passwordreset.php?source=" . $source . "&userid=" . $userID . "&message=" . $message);
+    exit();
+} elseif ($action == 'unlock') {
+    $userID = filter_input(INPUT_GET, 'userID');
+    $email = filter_input(INPUT_GET, "email");
+    $message = unlock_account($userID);
+    $message = ($message == 1) ? 'Account Unlocked' : 'Error unlocking account';
+    header("Location: /users/index.php?action=viewAccount&email=". $email . "&message=" . $message);
+    exit();
 }

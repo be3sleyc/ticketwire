@@ -34,12 +34,18 @@ function checkLockStatus($email) {
     return $locked[0];
 }
 
-function unlockAccount($email) {
-    // TODO
-}
+function unlock_account($userID) {
+    global $connection;
+    $query = "EXEC uspUnlockAccount @UserID = ?";
+    $params = array($userID);
+    $statement = sqlsrv_query($connection, $query, $params);
 
-function getLockedAccounts() {
-    //TODO
+    if ( $statement === false ) {
+        die( print_r( sqlsrv_errors(), true ) );
+    }
+
+    $updatedRows = sqlsrv_rows_affected($statement);
+    return $updatedRows;
 }
 
 function getUsers() {
@@ -337,11 +343,45 @@ function editAccount($UserID, $firstName, $lastName, $email, $phone) {
     return $message;
 }
 
+function reset_password($userID, $oldPassword, $newPassword) {
+    global $connection;
+    $query = "EXEC uspResetPassword @UserID = ?, @OldPassword = ?, @NewPassword = ?";
+    $params = array($userID, $oldPassword, $newPassword);
+    $statement = sqlsrv_query($connection, $query, $params);
+
+    if ( $statement === false ) {
+        die( print_r( sqlsrv_errors(), true ) );
+    }
+
+    $updatedRows = sqlsrv_rows_affected($statement);
+    return $updatedRows;
+}
+
 function disableAccount($UserID) {
-// TODO
+    global $connection;
+    $query = "EXEC uspDisableAccount @UserID = ?";
+    $params = array($UserID);
+    $statement = sqlsrv_query($connection, $query, $params);
+
+    if ( $statement === false ) {
+        die( print_r( sqlsrv_errors(), true ) );
+    }
+
+    $updatedRows = sqlsrv_rows_affected($statement);
+    return $updatedRows;
 }
 
 function enableAccount($UserID) {
-// TODO
+    global $connection;
+    $query = "EXEC uspEnableAccount @UserID = ?";
+    $params = array($UserID);
+    $statement = sqlsrv_query($connection, $query, $params);
+
+    if ( $statement === false ) {
+        die( print_r( sqlsrv_errors(), true ) );
+    }
+
+    $updatedRows = sqlsrv_rows_affected($statement);
+    return $updatedRows;
 }
 ?>
