@@ -31,7 +31,7 @@
                     </div>
                 </div>
                 <div style="text-align: center;">
-                <a href="../passwordreset.php?source=edit&userid=<?=$lookup_user['UserID']?>"><button type="button">Reset Password</button></a>
+                <a id="reset" href="../passwordreset.php?source=edit&userid=<?=$lookup_user['UserID']?>"><button type="button">Reset Password</button></a>
                 <input type="submit" id="save" disabled="" value="Save Changes">
                 <a id="cancel" href="https://www.ticketwire.io/users/index.php?action=list">
                     <input type="button" value="Cancel">
@@ -63,7 +63,7 @@
                 </div>
             </div>
             <div style="text-align: center;">
-            <a href="../passwordreset.php?source=edit"><button type="button">Reset Password</button></a>&nbsp;
+            <a id="reset" href="../passwordreset.php?source=edit"><button type="button">Reset Password</button></a>&nbsp;
             <input type="submit" id="save" disabled="" value="Save Changes">
             <a id="cancel" href="<?php echo $_SERVER['HTTP_REFERER']; ?>">
                 <input type="button" value="Cancel">

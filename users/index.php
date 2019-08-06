@@ -20,11 +20,11 @@ if ($action == 'login') {
     $errors = array();
 
     //Check for email and password
-    if ( $email == NULL ) {
-        array_push($errors,'Missing+email');
-    } 
+    if ($email == NULL) {
+        array_push($errors, 'Missing+email');
+    }
     if ($password == NULL) {
-        array_push($errors,'Missing+password'); 
+        array_push($errors, 'Missing+password');
     }
     if (count($errors) > 1) {
         $errorstr = join(",+", $errors);
@@ -58,7 +58,7 @@ if ($action == 'login') {
         } else {
             $_SESSION['profile_path'] = $user[6];
         }
-        if ( substr($user[5],0,10) == 'Technician') {
+        if (substr($user[5], 0, 10) == 'Technician') {
             $technician = getTechnician($_SESSION['user_id']);
             $_SESSION['team_id'] = $technician[6];
         }
@@ -94,8 +94,15 @@ if ($action == 'login') {
         case 'UpdateCust':
             $stAddr = filter_input(INPUT_POST, 'streetAddress');
             $citySt = filter_input(INPUT_POST, 'CityState');
+            $city = explode(', ', $cityState)[0];
+            $state = explode(', ', $cityState)[1];
+            die(print_r($city . ' ' . $state, true));
+            if (!isset($city) and !isset($state)) {
+                $message = 'Invalid City, State';
+                break;
+            }
             $zipCode = filter_input(INPUT_POST, 'zip');
-            $message = editCustomer($userID, $firstName, $lastName, $email, $phone, $stAddr, $citySt, $zipCode);
+            $message = editCustomer($userID, $firstName, $lastName, $email, $phone, $stAddr, $city, $state, $zipCode);
             break;
         case 'UpdateTech':
             // techs cant edit any role-based personal info yet
@@ -103,11 +110,11 @@ if ($action == 'login') {
             break;
         case 'UpdateCorp':
             // corps cant edit any role-based personal info yet
-            $message = editCorpUser($userID, $firstName, $lastName, $email, $phone);           
+            $message = editCorpUser($userID, $firstName, $lastName, $email, $phone);
             break;
     }
 
-    if ( strpos($message, 'success') > -1 ) {
+    if (strpos($message, 'success') > -1) {
         $user = getUser($email);
         $_SESSION['user_id'] = $user[0];
         $_SESSION['first_name'] = $user[1];
@@ -132,14 +139,22 @@ if ($action == 'login') {
     $phone = filter_input(INPUT_POST, 'phoneNumber', FILTER_SANITIZE_NUMBER_INT);
     $roleEdit = filter_input(INPUT_POST, 'roleAction');
     //$avatarPath = filter_input(INPUT_POST, 'profilePath');
-    
+
     switch ($roleEdit) {
         case 'CorpUpdateCust':
             $stAddr = filter_input(INPUT_POST, 'streetAddress');
             $citySt = filter_input(INPUT_POST, 'CityState');
+            $cityState = explode(', ', $citySt); 
+            if (count($cityState) == 2 ) {
+                $city = $cityState[0];
+                $state = $cityState[1];
+            } else {
+                $message = 'Invalid City, State';
+                break;
+            }
             $zipCode = filter_input(INPUT_POST, 'zip');
             //contract lenght and vip?
-            $message = corpEditCustomer($userID, $firstName, $lastName, $email, $phone, $stAddr, $citySt, $zipCode);
+            $message = corpEditCustomer($userID, $firstName, $lastName, $email, $phone, $stAddr, $city, $state, $zipCode);
             break;
         case 'CorpUpdateTech':
             $skillLevel = filter_input(INPUT_POST, 'SkillID');
@@ -152,7 +167,7 @@ if ($action == 'login') {
             $message = corpEditCorpUser($userID, $firstName, $lastName, $email, $phone);
             break;
     }
-    
+
     $lookup_user = getUser($email);
     include 'accountview.php';
     exit;

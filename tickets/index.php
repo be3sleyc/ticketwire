@@ -15,42 +15,130 @@ if ($action == NULL) {
 
 if ($action == 'list') {
     $status = '';
-    if( ISSET($_GET['status']) ) {
+    if (isset($_GET['status'])) {
         $status = filter_input(INPUT_GET, 'status');
     }
     # lists all tickets
     # should be different for each account: 
-        # corp users see all
-        # tech team leads see teams
-        # tech and customer sees own.
+    # corp users see all
+    # tech team leads see teams
+    # tech and customer sees own.
 
-    $user = array('UserID'=> $_SESSION['user_id'],'UserRole'=>$_SESSION['user_role']);
+    $user = array('UserID' => $_SESSION['user_id'], 'UserRole' => $_SESSION['user_role']);
 
-    if (substr($_SESSION['user_role'],0,9) == 'Corporate' ) {
+    if (substr($_SESSION['user_role'], 0, 9) == 'Corporate') {
         $tickets = get_tickets_all();
         include "ticketlistall.php";
-    } elseif (ISSET($_GET['team']) || ISSET($_POST['team']) ) {
+    } elseif (isset($_GET['team']) || isset($_POST['team'])) {
         $tickets = get_team_tickets($_SESSION['team_id']);
         include "ticketlistteam.php";
     } else {
         $tickets = get_tickets($user);
         include "ticketlist.php";
     }
-
-} elseif ($action == 'privateview') {
-    if( ISSET($_GET['ticketID']) ) {
-        $ticketID = filter_input(INPUT_GET, 'ticketID');
-        $ticket = get_ticket($ticketID);
-        $comments = get_prcomment($ticketID);
-        include "ticketviewprivate.php";
+} elseif ($action == 'listone') {
+    $status = '';
+    if (isset($_GET['status'])) {
+        $status = filter_input(INPUT_GET, 'status');
     }
-# should include options to edit?
-# able to view all comments
 
+    $user = array('UserID' => $_SESSION['user_id'], 'UserRole' => $_SESSION['user_role']);
+
+    if (substr($_SESSION['user_role'], 0, 9) == 'Corporate') {
+        $tickets = get_ticket($_SESSION['ticket']);
+        include "ticketlistall.php";
+    } elseif (isset($_GET['team']) || isset($_POST['team'])) {
+        $tickets = get_team_tickets($_SESSION['team_id']);
+        include "ticketlistteam.php";
+    } else {
+        $tickets = get_tickets($user);
+        include "ticketlist.php";
+    }
+} elseif ($action == 'privateview') {
+    $message = '';
+    if (isset($_GET['ticketID'])) {
+        $ticketID = filter_input(INPUT_GET, 'ticketID');
+    }elseif (ISSET($_POST['ticketID'])) {
+        $ticketID = filter_input(INPUT_POST, 'ticketID');
+    } else {
+        $status = 'No ticket specified';
+        header("Location: ./index.php?action=list&status=$status");
+        exit();
+    }
+    $ticket = get_ticket($ticketID);
+    $technicians = getTechnicians();
+    $comments = get_prcomments($ticketID);
+
+    if (ISSET($_POST['message'])) {
+        $message = filter_input(INPUT_POST, 'message');
+    }
+
+    if (substr($_SESSION['user_role'], 0, 9) == 'Corporate') {
+        include "ticketviewprivateCorp.php";
+    } elseif (substr($_SESSION['user_role'], 0, 10) == 'Technician' ) {
+        include "ticketviewprivateTech.php";
+    }
 } elseif ($action == 'view') {
-# should include options to add comment?
-# public comments only
+    # should include options to add comment?
+    # public comments only
+    $message = '';
+    if (isset($_GET['ticketID'])) {
+        $ticketID = filter_input(INPUT_GET, 'ticketID');
+    }elseif (ISSET($_POST['ticketID'])) {
+        $ticketID = filter_input(INPUT_POST, 'ticketID');
+    } else {
+        $status = 'No ticket specified';
+        header("Location: ./index.php?action=list&status=$status");
+        exit();
+    }
+    $ticket = get_ticket($ticketID);
+    $technicians = getTechnicians();
+    $comments = get_comments($ticketID);
 
+    if (ISSET($_POST['message'])) {
+        $message = filter_input(INPUT_POST, 'message');
+    }
+
+    include "ticketview.php";
+} elseif ($action == 'postComment') {
+    $ticketID = filter_input(INPUT_POST, 'ticketID');
+    $userID = filter_input(INPUT_POST, 'newCommentAuthorID');
+    $internal = filter_input(INPUT_POST, 'private');
+    $commentBody = filter_input(INPUT_POST, 'newCommentBody');
+    $postAction = filter_input(INPUT_POST, "PostAction");
+
+    if (post_comment($ticketID, $userID, $commentBody, $internal)) {
+        $message = 'Comment posted';
+    } else {
+        $message = 'Error posting comment';
+    }
+
+    header("Location: ./index.php?action=$postAction&ticketID=$ticketID&message=$message");
+    exit;
+} elseif ($action == 'techUpdate') {
+    $ticketID = filter_input(INPUT_POST, 'ticketID');
+    $ticketStatus = filter_input(INPUT_POST, 'ticketStatus');
+    $ticketStatusReason = filter_input(INPUT_POST, 'ticketStatusReason');
+    $ticketLastContact = filter_input(INPUT_POST, 'lastContact');
+    $ticketNextAppointment = filter_input(INPUT_POST, 'nextAppointment');
+    
+    $message = update_ticket_tech($ticketID, $ticketStatus, $ticketStatusReason, $ticketLastContact, $ticketNextAppointment);
+
+    header("Location: ./index.php?action=privateview&ticketID=$ticketID&message=$message");
+    exit;
+} elseif ($action == 'corpUpdate') {
+    $ticketID = filter_input(INPUT_POST, 'ticketID');
+    $ticketSubject = filter_input(INPUT_POST, 'subject');
+    $ticketDescription = filter_input(INPUT_POST, 'description');
+    $ticketPriority = filter_input(INPUT_POST, 'ticketPriority');
+    $ticketStatus = filter_input(INPUT_POST, 'ticketStatus');
+    $ticketStatusReason = filter_input(INPUT_POST, 'ticketStatusReason');
+    $ticketTechID = filter_input(INPUT_POST, 'technicianID');
+
+    $message = update_ticket_corp($ticketID, $ticketSubject, $ticketDescription, $ticketPriority, $ticketStatus, $ticketStatusReason, $ticketTechID);
+
+    header("Location: ./index.php?action=privateview&ticketID=$ticketID&message=$message");
+    exit;
 } elseif ($action == 'create') {
     #corp only
     $customers = getCustomers(); // Ought to simplify this to just UserID and Name, Have a separate function to get customer details by ID
@@ -69,13 +157,11 @@ if ($action == 'list') {
     $ticketID = create_ticket($corpID, $techID, $custID, $subject, $description, $priority);
     if ($ticketID > 0) {
         $status = 'Ticket create Successful';
-        header("Location: ./index.php?action=privateview&ticketID=$ticketID&status=$status"); 
-    exit();
+        header("Location: ./index.php?action=privateview&ticketID=$ticketID&status=$status");
+        exit();
     } else {
         $status = "Failure creating ticket$ticketID";
-        header("Location: ./index.php?action=list&status=$status"); 
+        header("Location: ./index.php?action=list&status=$status");
         exit();
     }
-    
-    
 }

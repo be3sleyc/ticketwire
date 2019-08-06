@@ -1,37 +1,86 @@
-<?php include '../view/header.php';?>
+<?php include '../view/header.php';
+if (isset($_POST['OpenClosedAll'])) {
+    $status = filter_input(INPUT_POST, 'OpenClosedAll');
+} else {
+    $status = 'Open';
+}
+?>
 <section>
-    <head>
-        <title>Ticket View</title>
-    </head>
-    <table>
-        <thead>
+    <div class="sectionContent">
+        <form class='ticketViewSelect' action="./" method="post">
+            <input type="hidden" name="action" value='list'>
+            <input type="hidden" name="team" value=1>
+            <select name="OpenClosedAll" id="OpenClosedAll" onchange="this.form.submit()">
+                <option value="Open" <?php if ($status == 'Open') {
+                                            echo ('selected');
+                                        } ?>>Open</option>
+                <option value="All" <?php if ($status == 'All') {
+                                        echo ('selected');
+                                    } ?>>All</option>
+                <option value="Closed" <?php if ($status == 'Closed') {
+                                            echo ('selected');
+                                        } ?>>Closed</option>
+            </select>
+        </form>
+        <table>
             <tr>
-                <th class="ticketlink">Ticket ID</th>
-                <th class="ticketlink">Customer Name</th>
-                <th class="ticketlink">Create Date</th>
-                <th class="ticketlink">Next Appointment</th>
-                <th class="ticketlink">Last Contact Date</th>
-                <th class="ticketlink">Priority</th>
-                <th class="ticketlink">Ticket Subject</th>
-                <th class="ticketlink">Ticket Description</th>
-                <th class="ticketlink">Ticket Status</th>
+                <th>Ticket id</th>
+                <th>Creation Date</th>
+                <th>Priority</th>
+                <th>Subject</th>
+                <th>Technician</th>
+                <th>Customer</th>
+                <th>Last Comment</th>
+                <th>Ticket Status</th>
             </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($tickets as $ticket): ?>
-            <tr>
-                    <td class="ticketlink"><a href=""><?=$ticket['TicketID']?></a></td>
-                    <td class="ticketlink"><a href=""><?=$ticket['CustomerName']?></a></td>
-                    <td class="ticketlink"><a href=""><?=$ticket['CreateDate']?></a></td>
-                    <td class="ticketlink"><a href=""><?=$ticket['NextAppointment']?></a></td>
-                    <td class="ticketlink"><a href=""><?=$ticket['LastContactDate']?></a></td>
-                    <td class="ticketlink"><a href=""><?=$ticket['Priority']?></a></td>
-                    <td class="ticketlink"><a href=""><?=$ticket['TicketSubject']?></a></td>
-                    <td class="ticketlink"><a href=""><?=$ticket['TicketDescription']?></a></td>
-                    <td class="ticketlink"><a href=""><?=$ticket['TicketStatus']?></a></td>
-            </tr>
-            <?php endforeach;?>
-        </tbody>
-    </table>
+
+            <?php foreach ($tickets as $ticket) :
+                switch ($status) {
+                    case 'All': ?>
+                    <tr class="ticketlink" onclick="window.location='../tickets/index.php?action=privateview&ticketID=<?= $ticket['TicketID'] ?>';">
+                        <td><?= $ticket['TicketID'] ?></td>
+                        <td><?= $ticket['CreateDate'] ?></td>
+                        <td><?= $ticket['Priority'] ?></td>
+                        <td><?= $ticket['TicketSubject'] ?></td>
+                        <td><?= $ticket['TechnicianName'] ?></td>
+                        <td><?= $ticket['CustomerName'] ?></td>
+                        <td><?= $ticket['LastCommentDate'] ?></td>
+                        <td><?= $ticket['TicketStatus'] . ' - ' . $ticket['TicketStatusReason'] ?></td>
+                    </tr>
+                    <?php break;
+                case 'Open':
+                    if ($ticket['TicketStatus'] != 'Closed' && $ticket['TicketStatusReason'] != 'Closed') : ?>
+                        <tr class="ticketlink" onclick="window.location='../tickets/index.php?action=privateview&ticketID=<?= $ticket['TicketID'] ?>';">
+                            <td><?= $ticket['TicketID'] ?></td>
+                            <td><?= $ticket['Priority'] ?></td>
+                            <td><?= $ticket['TicketSubject'] ?></td>
+                            <td><?= $ticket['TechnicianName'] ?></td>
+                            <td><?= $ticket['CustomerName'] ?></td>
+                            <td><?= $ticket['CreateDate'] ?></td>
+                            <td><?= $ticket['LastCommentDate'] ?></td>
+                            <td><?= $ticket['TicketStatus'] . ' - ' . $ticket['TicketStatusReason'] ?></td>
+                        </tr>
+                    <?php endif;
+                    break;
+                case 'Closed':
+                    if ($ticket['TicketStatus'] == 'Closed' || $ticket['TicketStatusReason'] == 'Closed') : ?>
+                        <tr class="ticketlink" onclick="window.location='../tickets/index.php?action=privateview&ticketID=<?= $ticket['TicketID'] ?>';">
+                            <td><?= $ticket['TicketID'] ?></td>
+                            <td><?= $ticket['Priority'] ?></td>
+                            <td><?= $ticket['TicketSubject'] ?></td>
+                            <td><?= $ticket['TechnicianName'] ?></td>
+                            <td><?= $ticket['CustomerName'] ?></td>
+                            <td><?= $ticket['CreateDate'] ?></td>
+                            <td><?= $ticket['LastCommentDate'] ?></td>
+                            <td><?= $ticket['TicketStatus'] . ' - ' . $ticket['TicketStatusReason'] ?></td>
+                        </tr>
+                    <?php endif;
+                    break;
+                default:
+                    break;
+            }
+        endforeach; ?>
+        </table>
+    </div>
 </section>
-<?php include '../view/footer.php'?>
+<?php include '../view/footer.php'; ?>

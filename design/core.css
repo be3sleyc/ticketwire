@@ -23,6 +23,7 @@ img {
 /* General Tags */
 body {
 	background-color: #ffffff;
+	font-size: 100%;
 	font-family: "DIN OT", 'Courier New', Courier, monospace;
 	min-width: 350px;
 }
@@ -113,7 +114,7 @@ body.login {
 
 /* specific to navigation bar */
 #head-title {
-	font-size: 32pt;
+	font-size: 250%;
 	vertical-align: top;
 	color: #ffffff;
 }
@@ -176,13 +177,13 @@ div.bar {
 
 .ticketlink {
 	margin: auto;
-	width: 11%;
-	border-collapse: collapse;
+	padding: 5px;
 }
 
 div.sectionContent {
 	display: inline-block;
 	text-align: left;
+	max-width: 40%;
 }
 
 div.sectionContent h2 {
@@ -197,8 +198,7 @@ div.sectionContent h2 {
 /* formating for lists */
 div.list {
 	margin: auto;
-	padding: 20px;
-	width: 800px;
+	padding: 10px;
 	background-color: #00aae8;
 }
 
@@ -208,11 +208,12 @@ div.list table {
 	box-shadow: 3px 3px #4b4b4b
 }
 
-div.list table,
+table,
 th,
 td {
 	border: 1px solid black;
 	border-collapse: collapse;
+	padding: 5px;
 }
 
 div.list th {
@@ -300,21 +301,26 @@ ul.faqlinks {
 
 /* Cancel link*/
 
-a:link#cancel {
+a#cancel:link {
 	text-decoration: none;
 	border: 0px;
 }
 
-a:hover#cancel {
+a#cancel:hover {
 	text-decoration: none;
 }
 
-a:visited#cancel {
+a#cancel:visited {
 	text-decoration: none;
 }
 
-a:active#cancel {
+a#cancel:active {
 	text-decoration: none;
+}
+
+a#reset:link {
+	text-decoration: none;
+	border: 0px;
 }
 
 div.grid-container {
@@ -382,7 +388,7 @@ form.ticketViewSelect {
 	cursor: pointer;
 	padding: 10px;
 	border-radius: 10px;
-	font-size: 16px;
+	font-size: 100%;
 }
 
 #topBtn:hover {
@@ -395,7 +401,7 @@ form.ticketViewSelect {
 	background-color: #00aae8;
 	color: white;
 	padding: 16px;
-	font-size: 16px;
+	font-size: 100%;
 	border: none;
 	cursor: pointer;
 }
@@ -435,4 +441,54 @@ form.ticketViewSelect {
 
 .show {
 	display: block;
+}
+
+tr.ticketlink:hover, tr.userlink:hover {
+	cursor: pointer;
+	font-weight: bold;
+	background-color: #bbbbbb;
+}
+
+div.editTicketButtons {
+	text-align: right;
+}
+
+#Ticket-Subject-Title {
+	font-size: 100%;
+	padding: 0px;
+}
+
+div.comment {
+	border-radius: 5px;
+	border: 1px solid #000;
+	margin: 5px 0px;
+	padding: 5px;
+}
+
+div.privateComment {
+	background-color: #00aae8;
+}
+
+div.commentDate, div.commentCreator {
+	display: inline;
+}
+
+div.commentCreator {
+	float: right;
+	font-weight: bold;
+}
+
+div.ticketDetails {
+	display: grid;
+	grid-template-columns: auto auto;
+	grid-column-gap: 5px;
+	grid-row-gap: 10px;
+}
+
+div.ticketsummary {
+	grid-column: 1/3 ;
+}
+
+div.ticketDescription {
+	grid-row: 2/5;
 }

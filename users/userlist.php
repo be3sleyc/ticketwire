@@ -5,8 +5,6 @@ if ($_SESSION['user_role'] != 'Corporate User - Manager' AND $_SESSION['user_rol
 }
 
 ?>
-<script src="/scripts/jquery.js"></script>
-<script>$('*[data-href]').on("click",function(){window.location = $(this).data('href');return false;});$("td > a").on("click",function(e){e.stopPropagation();});</script>
 
 <section>
 <div class='sectionContent'>
@@ -21,15 +19,15 @@ if ($_SESSION['user_role'] != 'Corporate User - Manager' AND $_SESSION['user_rol
                 <th>Role</th>
             </tr>
             <?php foreach ($users as $user): ?>
-                <tr data-href="../users/index.php?action=viewAccount&email=<?=$user['EmailAddress']?>">
-                    <td class="link"><a href="../users/index.php?action=viewAccount&email=<?=$user['EmailAddress']?>"><?=$user['EmailAddress']?></a></td>
-                    <td class="link"><a href="../users/index.php?action=viewAccount&email=<?=$user['EmailAddress']?>"><?=$user['FirstName']?></a></td>
-                    <td class="link"><a href="../users/index.php?action=viewAccount&email=<?=$user['EmailAddress']?>"><?=$user['LastName']?></a></td>
-                    <td class="link"><a href="../users/index.php?action=viewAccount&email=<?=$user['EmailAddress']?>"><?php 
+                <tr class="userlink" onclick="document.location='/users/index.php?action=viewAccount&email=<?=$user['EmailAddress']?>';">
+                    <td><?=$user['EmailAddress']?></td>
+                    <td><?=$user['FirstName']?></td>
+                    <td><?=$user['LastName']?></td>
+                    <td><?php 
                             echo preg_replace( "/(\w{3})(\w{3})(\w{4})/", "($1) $2-$3",$user['PhoneNumber']);
-                        ?></a>
+                        ?>
                     </td>
-                    <td class="link"><a href="../users/index.php?action=viewAccount&email=<?=$user['EmailAddress']?>"><?=$user['UserRole']?></a></td>
+                    <td><?=$user['UserRole']?></td>
                 </tr>
             <?php endforeach;?>
         </table>

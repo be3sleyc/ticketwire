@@ -259,10 +259,10 @@ function getRegionByTeam($TeamID) {
     return $region;
 }
 
-function editCustomer($UserID, $firstName, $lastName, $email, $phone, $streetAddr, $cityState, $zipCode) {
+function editCustomer($UserID, $firstName, $lastName, $email, $phone, $streetAddr, $city, $state, $zipCode) {
     global $connection;
-    $query = 'EXEC uspEditCustomer @StreetAddr = ?, @city = ?, @state = ?, @ZIP = ?';
-    $params = array();
+    $query = 'EXEC uspEditCustomer @UserID = ?, @StreetAddr = ?, @city = ?, @state = ?, @ZIP = ?';
+    $params = array($UserID, $streetAddr, $city, $state, $zipCode);
     $statement = sqlsrv_query($connection, $query, $params);
     if ( $statement === false ) {
         die( print_r( sqlsrv_errors(), true ) );
@@ -270,7 +270,7 @@ function editCustomer($UserID, $firstName, $lastName, $email, $phone, $streetAdd
 
     $updatedRows = sqlsrv_rows_affected($statement);
 
-    editAccount($UserID, $firstName, $lastName, $email, $phone);
+    return editAccount($UserID, $firstName, $lastName, $email, $phone);
 }
 
 function editTechnician($UserID, $firstName, $lastName, $email, $phone) {
@@ -283,14 +283,10 @@ function editCorpUser($userID, $firstName, $lastName, $email, $phone) {
     return editAccount($userID, $firstName, $lastName, $email, $phone);
 }
 
-function corpEditCustomer($userID, $firstName, $lastName, $email, $phone, $stAddr, $citySt, $zipCode) {
+function corpEditCustomer($userID, $firstName, $lastName, $email, $phone, $stAddr, $city, $state, $zipCode) {
     global $connection;
-    
-    $city = preg_replace('/(.+), .+/', "$1", $citySt);
-    $state = preg_replace('/.+, (.+)/', "$1", $citySt);
-
-    $query = 'EXEC uspEditCustomer @StreetAddr = ?, @city = ?, @state = ?, @ZIP = ?';
-    $params = array($stAddr, $city, $state, $zipCode);
+    $query = 'EXEC uspEditCustomer @UserID = ?, @StreetAddr = ?, @city = ?, @state = ?, @ZIP = ?';
+    $params = array($userID, $stAddr, $city, $state, $zipCode);
     $statement = sqlsrv_query($connection, $query, $params);
     if ( $statement === false ) {
         die( print_r( sqlsrv_errors(), true ) );
@@ -298,13 +294,13 @@ function corpEditCustomer($userID, $firstName, $lastName, $email, $phone, $stAdd
 
     $updatedRows = sqlsrv_rows_affected($statement);
 
-    editAccount($userID, $firstName, $lastName, $email, $phone);
+    return editAccount($userID, $firstName, $lastName, $email, $phone);
 }
 
 function corpEditTechnician($userID, $firstName, $lastName, $email, $phone, $skillLevel, $teamID) {
     global $connection;
-    $query = 'EXEC uspEditTechnician @SkillLevel = ?, @TeamID = ?';
-    $params = array($skillLevel, $teamID);
+    $query = 'EXEC uspEditTechnician @UserID = ?, @SkillLevel = ?, @TeamID = ?';
+    $params = array($userID, $skillLevel, $teamID);
     $statement = sqlsrv_query($connection, $query, $params);
     if ( $statement === false ) {
         die( print_r( sqlsrv_errors(), true ) );
@@ -312,7 +308,7 @@ function corpEditTechnician($userID, $firstName, $lastName, $email, $phone, $ski
 
     $updatedRows = sqlsrv_rows_affected($statement);
 
-    editAccount($userID, $firstName, $lastName, $email, $phone);
+    return editAccount($userID, $firstName, $lastName, $email, $phone);
 }
 
 function corpEditCorpUser($userID, $firstName, $lastName, $email, $phone) {
