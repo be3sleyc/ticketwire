@@ -19,27 +19,27 @@
     <ul>
         <li>
             <h3>Mazen Alshareef</h3>
-            <p></p>
+            <p>Scrum Team Member</p>
         </li>
         <li>
             <h3>Christian Beesley</h3>
-            <p></p>
+            <p>Scrum Team Member</p>
         </li>
         <li>
             <h3>Mariah Brown</h3>
-            <p></p>
+            <p>Scrum Master</p>
         </li>
         <li>
             <h3>Derek Kennet</h3>
-            <p></p>
+            <p>Assistant Scrum Master</p>
         </li>
         <li>
             <h3>Cody Pickett</h3>
-            <p></p>
+            <p>Scrum Team Member</p>
         </li>
         <li>
             <h3>Jay Waldron</h3>
-            <p></p>
+            <p>Product Owner</p>
         </li>
     </ul>
 </div>

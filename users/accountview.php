@@ -11,7 +11,7 @@
                         <input type="hidden" name="userid" value="<?= $lookup_user['UserID'] ?>">
                         <input type="hidden" name="action" value="corpUpdateUser">
                         <img src="<?= "/images/profile/full_" . $lookup_user['AvatarFilePath'] ?>" alt="Profile picture of <?= $lookup_user['FirstName'] . ' ' . $lookup_user['LastName']; ?>"><br>
-                        <button title="This feature is not enabled.">Change Picture</button><br>
+                        <button title="This feature is not enabled." disabled>Change Picture</button><br>
                         <label>First Name:&nbsp;</label><input type="text" name="firstName" id="firstName" value="<?= $lookup_user['FirstName']; ?>"><br>
                         <label>Last Name:&nbsp;</label><input type="text" name="lastName" id="lastName" value="<?= $lookup_user['LastName']; ?>"><br>
                         <label>Email Address:&nbsp;</label><input type="email" name="emailAddress" id="emailAddress" value="<?= $lookup_user['EmailAddress']; ?>"><br>
@@ -50,7 +50,7 @@
                 <div class="AccountInfo">
                     <div class="genInfo">
                         <img src="<?= "/images/profile/full_" . $_SESSION['profile_path'] ?>" alt="Profile picture of <?= $_SESSION['first_name'] . ' ' . $_SESSION['last_name']; ?>"><br>
-                        <button title="This feature is not enabled.">Change Picture</button><br>
+                        <button title="This feature is not enabled." disabled>Change Picture</button><br>
                         <label>First Name:&nbsp;</label><input type="text" name="firstName" id="firstName" value="<?= $_SESSION['first_name']; ?>"><br>
                         <label>Last Name:&nbsp;</label><input type="text" name="lastName" id="lastName" value="<?= $_SESSION['last_name']; ?>"><br>
                         <label>Email Address:&nbsp;</label><input type="email" name="emailAddress" id="emailAddress" value="<?= $_SESSION['email']; ?>"><br>

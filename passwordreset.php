@@ -29,7 +29,7 @@ if (isset($_GET['message'])) {
             <label for="email">Email address:&nbsp;</label>
             <input type="email" name="recoveryEmail" id="recoveryEmail" require><br>
             <label for="DOB">Date of Birth:&nbsp;</label>
-            <input type="date" name="recoverydob" id="recoverydob" require><br>
+            <input type="date" name="recoverydob" id="recoverydob" max="2099-01-01" require><br>
             <input type="submit" value="Submit">
          </form>
       </div>
@@ -101,7 +101,7 @@ case 'Locked':
                <label for="email">Email address:&nbsp;</label>
                <input type="email" name="recoveryEmail" id="recoveryEmail" require><br>
                <label for="DOB">Date of Birth:&nbsp;</label>
-               <input type="date" name="recoverydob" id="recoverydob" require><br>
+               <input type="date" name="recoverydob" id="recoverydob" max="2099-01-01" require><br>
                <input type="submit" value="Submit">
             </form>
          </div>

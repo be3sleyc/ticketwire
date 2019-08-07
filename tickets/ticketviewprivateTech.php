@@ -60,9 +60,9 @@
                 </div>
                 <div class="ticketContact">
                     <label for="lastContact">Last Contacted:&nbsp;</label>
-                    <input type="date" name="lastContact" id="lastContact" <?php echo ($ticket['LastContactDate']) ? "value=" . $ticket['LastContactDate'] : 'null' ?>><br>
+                    <input type="date" name="lastContact" id="lastContact" max="2099-01-01" <?php echo ($ticket['LastContactDate']) ? "value=" . $ticket['LastContactDate'] : '' ?>><br>
                     <label for="nextAppointment">Next Appointment:&nbsp;</label>
-                    <input type="date" name="nextAppointment" id="nextAppointment" <?php echo ($ticket['NextAppointment']) ? "value=" . $ticket['NextAppointment'] : 'null' ?>><br>
+                    <input type="date" name="nextAppointment" id="nextAppointment" max="2099-01-01" <?php echo ($ticket['NextAppointment']) ? "value=" . $ticket['NextAppointment'] : '' ?>><br>
                 </div>
             </div>
         </form>
