@@ -94,10 +94,11 @@ if ($action == 'login') {
         case 'UpdateCust':
             $stAddr = filter_input(INPUT_POST, 'streetAddress');
             $citySt = filter_input(INPUT_POST, 'CityState');
-            $city = explode(', ', $cityState)[0];
-            $state = explode(', ', $cityState)[1];
-            die(print_r($city . ' ' . $state, true));
-            if (!isset($city) and !isset($state)) {
+            $cityState = explode(',', $citySt);
+            if (count($cityState) == 2) {
+                $city = explode(',', $citySt)[0];
+                $state = trim(explode(',', $citySt)[1]);
+            } else {
                 $message = 'Invalid City, State';
                 break;
             }
@@ -144,10 +145,10 @@ if ($action == 'login') {
         case 'CorpUpdateCust':
             $stAddr = filter_input(INPUT_POST, 'streetAddress');
             $citySt = filter_input(INPUT_POST, 'CityState');
-            $cityState = explode(', ', $citySt);
+            $cityState = explode(',', $citySt);
             if (count($cityState) == 2) {
                 $city = $cityState[0];
-                $state = $cityState[1];
+                $state = trim($cityState[1]);
             } else {
                 $message = 'Invalid City, State';
                 break;
@@ -208,12 +209,12 @@ if ($action == 'login') {
 
 } elseif ($action == 'forgotLockedOut') {
     $source = filter_input(INPUT_POST, "source");
-    $userID = filter_input(INPUT_POST, "userID");
+    $userEmail = filter_input(INPUT_POST, "userEmail");
     $r = filter_input(INPUT_POST, "recoveryEmail");
     $dob = filter_input(INPUT_POST, "recoverydob");
 
     $message = "Email function is not setup. Please call us to reset your account.";
-    header("Location: /passwordreset.php?source=" . $source . "&userid=" . $userID . "&message=" . $message);
+    header("Location: /passwordreset.php?source=" . $source . "&user=" . $userEmail . "&message=" . $message);
     exit();
 } elseif ($action == 'unlock') {
     $userID = filter_input(INPUT_GET, 'userID');

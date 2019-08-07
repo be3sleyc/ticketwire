@@ -123,8 +123,13 @@ if ($action == 'list') {
     $ticketNextAppointment = filter_input(INPUT_POST, 'nextAppointment');
     
     $message = update_ticket_tech($ticketID, $ticketStatus, $ticketStatusReason, $ticketLastContact, $ticketNextAppointment);
+    if ($message > 0) {
+        $status = 'Ticket edited successfully';
+    } else {
+        $status = "Failure editing ticket$ticketID";
+    }
 
-    header("Location: ./index.php?action=privateview&ticketID=$ticketID&message=$message");
+    header("Location: ./index.php?action=privateview&ticketID=$ticketID&message=$status");
     exit;
 } elseif ($action == 'corpUpdate') {
     $ticketID = filter_input(INPUT_POST, 'ticketID');
@@ -136,8 +141,13 @@ if ($action == 'list') {
     $ticketTechID = filter_input(INPUT_POST, 'technicianID');
 
     $message = update_ticket_corp($ticketID, $ticketSubject, $ticketDescription, $ticketPriority, $ticketStatus, $ticketStatusReason, $ticketTechID);
+    if ($message > 0) {
+        $status = 'Ticket edited successfully';
+    } else {
+        $status = "Failure editing ticket$ticketID";
+    }
 
-    header("Location: ./index.php?action=privateview&ticketID=$ticketID&message=$message");
+    header("Location: ./index.php?action=privateview&ticketID=$ticketID&message=$status");
     exit;
 } elseif ($action == 'create') {
     #corp only

@@ -3,15 +3,15 @@
     <div class="sectionContent">
         <?php if (($_SESSION['user_role'] == 'Corporate User - SysAdmin' or $_SESSION['user_role'] == 'Corporate User - Manager') && isset($lookup_user)) : ?>
             <h2 style="text-align:center;">Account Details:&nbsp;<?= $lookup_user['FirstName'] . ' ' . $lookup_user['LastName']; ?></h2>
+            <div class="message"><?= $message ?></div>
             <form action=".\index.php" method="POST" name="updateUser" id="updateUserFrom">
                 <div class="AccountInfo">
                     <div class="genInfo">
                         <h3>General Information</h3>
-                        <div class="message"><?= $message ?></div>
                         <input type="hidden" name="userid" value="<?= $lookup_user['UserID'] ?>">
                         <input type="hidden" name="action" value="corpUpdateUser">
                         <img src="<?= "/images/profile/full_" . $lookup_user['AvatarFilePath'] ?>" alt="Profile picture of <?= $lookup_user['FirstName'] . ' ' . $lookup_user['LastName']; ?>"><br>
-                        <input type="button" value="Change Picture"><br>
+                        <button title="This feature is not enabled.">Change Picture</button><br>
                         <label>First Name:&nbsp;</label><input type="text" name="firstName" id="firstName" value="<?= $lookup_user['FirstName']; ?>"><br>
                         <label>Last Name:&nbsp;</label><input type="text" name="lastName" id="lastName" value="<?= $lookup_user['LastName']; ?>"><br>
                         <label>Email Address:&nbsp;</label><input type="email" name="emailAddress" id="emailAddress" value="<?= $lookup_user['EmailAddress']; ?>"><br>
@@ -32,7 +32,7 @@
                 </div>
                 <div style="text-align: center;">
                     <?php if ($lookup_user['Locked'] == 1) : ?>
-                        <a id="unlock" href="/users/index.php?action=unlock&userid=<?= $lookup_user['UserID'] ?>&email=<?=$lookup_user['EmailAddress']?>"><button type="button">Unlock Account</button></a>
+                        <a id="unlock" href="/users/index.php?action=unlock&userID=<?= $lookup_user['UserID'] ?>&email=<?=$lookup_user['EmailAddress']?>"><button type="button">Unlock Account</button></a>
                     <?php endif; ?>
                     <a id="reset" href="../passwordreset.php?source=corpEdit&userid=<?= $lookup_user['UserID'] ?>&email=<?=$lookup_user['EmailAddress']?>"><button type="button">Reset Password</button></a>
                     <input type="submit" id="save" disabled="" value="Save Changes">
@@ -50,7 +50,7 @@
                 <div class="AccountInfo">
                     <div class="genInfo">
                         <img src="<?= "/images/profile/full_" . $_SESSION['profile_path'] ?>" alt="Profile picture of <?= $_SESSION['first_name'] . ' ' . $_SESSION['last_name']; ?>"><br>
-                        <input type="button" value="Change Picture"><br>
+                        <button title="This feature is not enabled.">Change Picture</button><br>
                         <label>First Name:&nbsp;</label><input type="text" name="firstName" id="firstName" value="<?= $_SESSION['first_name']; ?>"><br>
                         <label>Last Name:&nbsp;</label><input type="text" name="lastName" id="lastName" value="<?= $_SESSION['last_name']; ?>"><br>
                         <label>Email Address:&nbsp;</label><input type="email" name="emailAddress" id="emailAddress" value="<?= $_SESSION['email']; ?>"><br>

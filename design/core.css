@@ -63,6 +63,10 @@ section {
 	z-index: -1;
 }
 
+h2 {
+	margin: auto;
+}
+
 h3 {
 	margin-top: 0px;
 }
@@ -184,12 +188,22 @@ div.bar {
 div.sectionContent {
 	display: inline-block;
 	text-align: left;
-	max-width: 40%;
+	max-width: 100%;
 }
 
 div.sectionContent h2 {
 	text-align: center;
 }
+
+div.intro {
+	display: inline-block;
+	text-align: left;
+	max-width: 60%;
+}
+
+div.intro h2 {
+	text-align: center;
+ }
 
 .errors {
 	color: #c40000;
@@ -198,15 +212,16 @@ div.sectionContent h2 {
 
 /* formating for lists */
 div.list {
-	margin: auto;
-	padding: 10px;
-	background-color: #00aae8;
+	margin: auto;	
+	text-align: center;
 }
 
 div.list table {
 	background: #ffffff;
 	margin: auto;
-	box-shadow: 3px 3px #4b4b4b
+	box-shadow: 3px 3px #4b4b4b;
+	float: center;
+	border: 10px solid #0088c6;;
 }
 
 table,

@@ -107,11 +107,19 @@ if (isset($_POST['OpenClosedAll'])) {
                             <tr class="ticketlink" onclick="window.location='../tickets/index.php?action=privateview&ticketID=<?= $ticket['TicketID'] ?>';">
                             <?php endif; ?>
                             <td><?= $ticket['TicketID'] ?></td>
+                            <td><?= $ticket['CreateDate'] ?></td>
                             <td><?= $ticket['Priority'] ?></td>
                             <td><?= $ticket['TicketSubject'] ?></td>
-                            <td><?= $ticket['TechnicianName'] ?></td>
-                            <td><?= $ticket['CustomerName'] ?></td>
-                            <td><?= $ticket['CreateDate'] ?></td>
+                            <?php switch ($_SESSION['user_role']) {
+                                case 'Customer':
+                                    $accountName = $ticket['TechnicianName'];
+                                    break;
+                                default:
+                                    $accountName = $ticket['CustomerName'];
+                                    break;
+                            }
+                            echo '<td>' . $accountName . '</td>';
+                            ?>
                             <td><?= $ticket['LastCommentDate'] ?></td>
                             <td><?= $ticket['TicketStatus'] . ' - ' . $ticket['TicketStatusReason'] ?></td>
                         </tr>

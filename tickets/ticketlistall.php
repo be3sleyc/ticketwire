@@ -28,8 +28,8 @@ if (isset($_POST['OpenClosedAll'])) {
                 <th>Creation Date</th>
                 <th>Priority</th>
                 <th>Subject</th>
-                <th>Technician</th>
-                <th>Customer</th>
+                <th>Technician Name</th>
+                <th>Customer Name</th>
                 <th>Last Comment</th>
                 <th>Ticket Status</th>
             </tr>
@@ -52,11 +52,11 @@ if (isset($_POST['OpenClosedAll'])) {
                     if ($ticket['TicketStatus'] != 'Closed' && $ticket['TicketStatusReason'] != 'Closed') : ?>
                         <tr class="ticketlink" onclick="window.location='../tickets/index.php?action=privateview&ticketID=<?= $ticket['TicketID'] ?>';">
                             <td><?= $ticket['TicketID'] ?></td>
+                            <td><?= $ticket['CreateDate'] ?></td>
                             <td><?= $ticket['Priority'] ?></td>
                             <td><?= $ticket['TicketSubject'] ?></td>
                             <td><?= $ticket['TechnicianName'] ?></td>
                             <td><?= $ticket['CustomerName'] ?></td>
-                            <td><?= $ticket['CreateDate'] ?></td>
                             <td><?= $ticket['LastCommentDate'] ?></td>
                             <td><?= $ticket['TicketStatus'] . ' - ' . $ticket['TicketStatusReason'] ?></td>
                         </tr>
@@ -66,11 +66,11 @@ if (isset($_POST['OpenClosedAll'])) {
                     if ($ticket['TicketStatus'] == 'Closed' || $ticket['TicketStatusReason'] == 'Closed') : ?>
                         <tr class="ticketlink" onclick="window.location='../tickets/index.php?action=privateview&ticketID=<?= $ticket['TicketID'] ?>';">
                             <td><?= $ticket['TicketID'] ?></td>
+                            <td><?= $ticket['CreateDate'] ?></td>
                             <td><?= $ticket['Priority'] ?></td>
                             <td><?= $ticket['TicketSubject'] ?></td>
                             <td><?= $ticket['TechnicianName'] ?></td>
                             <td><?= $ticket['CustomerName'] ?></td>
-                            <td><?= $ticket['CreateDate'] ?></td>
                             <td><?= $ticket['LastCommentDate'] ?></td>
                             <td><?= $ticket['TicketStatus'] . ' - ' . $ticket['TicketStatusReason'] ?></td>
                         </tr>

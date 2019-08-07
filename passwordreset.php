@@ -19,6 +19,7 @@ if (isset($_GET['message'])) {
    <section>
       <div class="sectionContent">
          <h2>Account Recovery</h2>
+         <?php $message = "Email function is not setup. Please call us to reset your account."; ?>
          <div class="errors"><?= $message ?></div>
          <p>Forget your password? We'll send you an email to help you reset your password. Please provide your email address associated with your ticketwire account and your date of birth.</p>
          <form action="/users/index.php" method="post">
@@ -89,11 +90,12 @@ case 'Locked':
       <section>
          <div class="sectionContent">
             <h2>Account Recovery</h2>
+            <?php $message = "Email function is not setup. Please call us to reset your account."; ?>
             <div class="errors"><?= $message ?></div>
             <form action="/users/index.php" method="post">
                <input type="hidden" name="action" value="forgotLockedOut">
-               <input type="hidden" name="userID" value="<?= $userID ?>">
-               <input type="hidden" name="source" value="locked">
+               <input type="hidden" name="userEmail" value="<?= filter_input(INPUT_GET, 'user') ?>">
+               <input type="hidden" name="source" value="Locked">
                <p>Your account is locked! You must have unsuccessfully tried to log in too many times in too short of a timespan.<br>
                   Please provide your email and birthdate and we'll send you a link to reset your password, or you can wait for a corporate user to unlock your account. </p>
                <label for="email">Email address:&nbsp;</label>
