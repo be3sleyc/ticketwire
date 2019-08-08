@@ -12,10 +12,10 @@
                         <input type="hidden" name="action" value="corpUpdateUser">
                         <img src="<?= "/images/profile/full_" . $lookup_user['AvatarFilePath'] ?>" alt="Profile picture of <?= $lookup_user['FirstName'] . ' ' . $lookup_user['LastName']; ?>"><br>
                         <button title="This feature is not enabled." disabled>Change Picture</button><br>
-                        <label>First Name:&nbsp;</label><input type="text" name="firstName" id="firstName" value="<?= $lookup_user['FirstName']; ?>"><br>
-                        <label>Last Name:&nbsp;</label><input type="text" name="lastName" id="lastName" value="<?= $lookup_user['LastName']; ?>"><br>
-                        <label>Email Address:&nbsp;</label><input type="email" name="emailAddress" id="emailAddress" value="<?= $lookup_user['EmailAddress']; ?>"><br>
-                        <label>Phone Number:&nbsp;</label><input type="text" name="phoneNumber" id="phoneNumber" value="<?= $lookup_user['PhoneNumber']; ?>"><br>
+                        <label>First Name:&nbsp;</label><input type="text" name="firstName" id="firstName" value="<?= $lookup_user['FirstName']; ?>" required><br>
+                        <label>Last Name:&nbsp;</label><input type="text" name="lastName" id="lastName" value="<?= $lookup_user['LastName']; ?>" required><br>
+                        <label>Email Address:&nbsp;</label><input type="email" name="emailAddress" id="emailAddress" value="<?= $lookup_user['EmailAddress']; ?>" required><br>
+                        <label>Phone Number:&nbsp;</label><input type="text" name="phoneNumber" id="phoneNumber" value="<?= $lookup_user['PhoneNumber']; ?>" required><br>
                         <label>User Role:&nbsp;<?= $lookup_user['UserRole']; ?></label><br>
                     </div>
 
@@ -34,7 +34,7 @@
                     <?php if ($lookup_user['Locked'] == 1) : ?>
                         <a id="unlock" href="/users/index.php?action=unlock&userID=<?= $lookup_user['UserID'] ?>&email=<?=$lookup_user['EmailAddress']?>"><button type="button">Unlock Account</button></a>
                     <?php endif; ?>
-                    <a id="reset" href="../passwordreset.php?source=corpEdit&userid=<?= $lookup_user['UserID'] ?>&email=<?=$lookup_user['EmailAddress']?>"><button type="button">Reset Password</button></a>
+                    <a id="reset" href="../passwordreset.php?source=corpEdit&userid=<?= $lookup_user['UserID'] ?>&name=<?=$lookup_user['FirstName'] . ' ' . $lookup_user['LastName']?>"><button type="button">Reset Password</button></a>
                     <input type="submit" id="save" disabled="" value="Save Changes">
                     <a id="cancel" href="https://www.ticketwire.io/users/index.php?action=list">
                         <input type="button" value="Cancel">
@@ -51,10 +51,10 @@
                     <div class="genInfo">
                         <img src="<?= "/images/profile/full_" . $_SESSION['profile_path'] ?>" alt="Profile picture of <?= $_SESSION['first_name'] . ' ' . $_SESSION['last_name']; ?>"><br>
                         <button title="This feature is not enabled." disabled>Change Picture</button><br>
-                        <label>First Name:&nbsp;</label><input type="text" name="firstName" id="firstName" value="<?= $_SESSION['first_name']; ?>"><br>
-                        <label>Last Name:&nbsp;</label><input type="text" name="lastName" id="lastName" value="<?= $_SESSION['last_name']; ?>"><br>
-                        <label>Email Address:&nbsp;</label><input type="email" name="emailAddress" id="emailAddress" value="<?= $_SESSION['email']; ?>"><br>
-                        <label>Phone Number:&nbsp;</label><input type="text" name="phoneNumber" id="phoneNumber" value="<?= $_SESSION['phone']; ?>"><br>
+                        <label>First Name:&nbsp;</label><input type="text" name="firstName" id="firstName" value="<?= $_SESSION['first_name']; ?>" required><br>
+                        <label>Last Name:&nbsp;</label><input type="text" name="lastName" id="lastName" value="<?= $_SESSION['last_name']; ?>" required><br>
+                        <label>Email Address:&nbsp;</label><input type="email" name="emailAddress" id="emailAddress" value="<?= $_SESSION['email']; ?>" required><br>
+                        <label>Phone Number:&nbsp;</label><input type="text" name="phoneNumber" id="phoneNumber" value="<?= $_SESSION['phone']; ?>" required><br>
                     </div>
                     <div class="roleInfo">
                         <?php if ($_SESSION['user_role'] == 'Customer') :

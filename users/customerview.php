@@ -5,9 +5,9 @@
 <label for="birthDate">Birthdate:&nbsp;<?=$customerInfo['BirthDate'];?></label><br>
 <label for="streetAddress">Street Address:</label><br>
 <div class="address">
-    <input type="text" name="streetAddress" id="streetAddress" value="<?=$customerInfo['StreetAddr'];?>"><br>
-    <input type="text" name="CityState" id="CityState" value="<?=$customerInfo['City'].", ".$customerInfo['State'];?>"><br>
-    <input type="text" name="zip" id="zip" size="7" onchange="updateRegionInfo(this.value)" value="<?=$customerInfo['ZIPCode'];?>">
+    <input type="text" name="streetAddress" id="streetAddress" value="<?=$customerInfo['StreetAddr'];?>" required><br>
+    <input type="text" name="CityState" id="CityState" value="<?=$customerInfo['City'].", ".$customerInfo['State'];?>" required><br>
+    <input type="text" name="zip" id="zip" size="7" onchange="updateRegionInfo(this.value)" value="<?=$customerInfo['ZIPCode'];?>" required>
 </div>
 <label for="regionInfo">Region:&nbsp;<span id="RegionName"><?=$customerInfo['RegionName'];?></span></label><br><br>
 <h3>Contract Information</h3>

@@ -7,6 +7,7 @@ if (isset($_GET['userid'])) {
 } else if (isset($_SESSION['user_id'])) {
    $userID = $_SESSION['user_id'];
 }
+$userName = filter_input(INPUT_GET, 'name');
 $message = '';
 if (isset($_GET['message'])) {
    $message = filter_input(INPUT_GET, 'message');
@@ -68,7 +69,7 @@ case 'corpEdit':
          <div class="sectionContent">
             <h2>Password Reset</h2>
             <div class="errors"><?= $message ?></div>
-            <p>Reset user <?= $userID ?>'s account password</p>
+            <p>Reset user <?= $userName ?>'s account password</p>
             <form action="/users/index.php" method="post">
                <input type="hidden" name="action" value="corpPasswordReset">
                <input type="hidden" name="userID" value="<?= $userID ?>">

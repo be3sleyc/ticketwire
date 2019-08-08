@@ -7,9 +7,11 @@ if (isset($_POST['OpenClosedAll'])) {
 ?>
 <section>
     <div class="sectionContent">
+    <br>
         <form class='ticketViewSelect' action="./" method="post">
             <input type="hidden" name="action" value='list'>
             <input type="hidden" name="team" value=1>
+            <label for="OpenClosedAll">Ticket Status Filter:&nbsp;</label>
             <select name="OpenClosedAll" id="OpenClosedAll" onchange="this.form.submit()">
                 <option value="Open" <?php if ($status == 'Open') {
                                             echo ('selected');
@@ -22,7 +24,7 @@ if (isset($_POST['OpenClosedAll'])) {
                                         } ?>>Closed</option>
             </select>
         </form>
-        <table>
+        <table class="ticketTable">
             <tr>
                 <th>Ticket id</th>
                 <th>Creation Date</th>

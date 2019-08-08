@@ -21,7 +21,7 @@
 <li><a href="#resetPassword">How do I reset my password?</a></li>
 </ul>
 <?php if ( isset($_SESSION['email']) ):?>
-    <p><a href="<?php
+    <p><button class="moreInfo"><a href="<?php
         switch (substr($_SESSION['user_role'], 0, 4)) {
             case 'Corp':
                 echo 'https://docs.google.com/document/d/1_vGbRqnQXk5cwyTgNQs9L8YEApsIBlCtaGj4ZF-m7v0/edit?usp=sharing';
@@ -30,12 +30,12 @@
                 echo 'https://docs.google.com/document/d/1vgDW_mmeADAhDmvONucMFhugihhS8NxKcbf8B-3qbzY/edit?usp=sharing';
                 break;
             case 'Cust':
-                echo 'https://docs.google.com/document/d/1vgDW_mmeADAhDmvONucMFhugihhS8NxKcbf8B-3qbzY/edit?usp=sharing';
+                echo 'https://docs.google.com/document/d/1eUonjgkB-rYyb58mAQ4Vw5NS69rVT61bNdknetYtcZE/edit?usp=sharing';
                 break;
         }
-    ?>" target="_blank">Need more infomation?</a>
+    ?>" target="_blank">Need more infomation?</button>
     <?php if($_SESSION['user_role'] == "Corporate User - SysAdmin"):?>
-        <a href="https://docs.google.com/document/d/1LnRx329KUdBe6_ywIRQ7Vm9Uv3wZPjnL2vmwTpD1xoY/edit?usp=sharing" target="_blank">Backend Information</a>
+    <button class="moreInfo"><a href="https://docs.google.com/document/d/1LnRx329KUdBe6_ywIRQ7Vm9Uv3wZPjnL2vmwTpD1xoY/edit?usp=sharing" target="_blank">Backend Information</a></button>
     <?php endif; ?>
     </p>
 <?php endif;?>

@@ -183,6 +183,10 @@ if ($action == 'login') {
         $message = "Candidate passwords do not match.";
         header("Location: /passwordreset.php?source=" . $source . "&userid=" . $userID . "&message=" . $message);
         exit();
+    } elseif (strlen($newPassword) < 8) { 
+        $message = "Candidate password must be at least 8 character long.";
+        header("Location: /passwordreset.php?source=" . $source . "&userid=" . $userID . "&message=" . $message);
+        exit();
     } else {
         $message = reset_password($userID, $oldPassword, $newPassword);
         $message = ($message == 1) ? 'Password changed successfully' : 'Error changing password';
@@ -200,6 +204,10 @@ if ($action == 'login') {
         $message = "Candidate passwords do not match.";
         header("Location: /passwordreset.php?source=" . $source . "&userid=" . $userID . "&message=" . $message);
         exit();
+    } elseif (strlen($newPassword) < 8) { 
+            $message = "Candidate password must be at least 8 character long.";
+            header("Location: /passwordreset.php?source=" . $source . "&userid=" . $userID . "&message=" . $message);
+            exit();
     } else {
         $message = reset_password($userID, $oldPassword, $newPassword);
         $message = ($message == 1) ? 'Password changed successfully' : 'Error changing password';

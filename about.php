@@ -12,7 +12,7 @@
 <br>
 <p>
     Ticketwire is a web based ticket managment system, conceptually developed for Northstar Alarm. <br>
-    Ticketwire was designed for customers to be able to view and answer or ask questions about current tickets; and as a way for managers and technicians to create, edit, and fulfil ticket requests. <br>
+    Ticketwire was designed for customers to be able to view and answer or ask questions about current tickets; and as a way for managers and technicians to create, edit, and fulfill ticket requests. <br>
 </p>
 <h2></h2>
     Ticketwire was developed by six Utah Valley University IT or IS students over the 2019 Spring and Summer semesters.<br>

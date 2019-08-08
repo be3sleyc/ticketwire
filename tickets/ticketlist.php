@@ -7,7 +7,9 @@ if (isset($_POST['OpenClosedAll'])) {
 ?>
 <section>
     <div class="sectionContent">
+    <br>
         <form class='ticketViewSelect' action="./" method="post">
+            <label for="OpenClosedAll">Ticket Status Filter:&nbsp;</label>
             <select name="OpenClosedAll" id="OpenClosedAll" onchange="this.form.submit()">
                 <option value="Open" <?php if ($status == 'Open') {
                                             echo ('selected');
@@ -20,7 +22,7 @@ if (isset($_POST['OpenClosedAll'])) {
                                         } ?>>Closed</option>
             </select>
         </form>
-        <table>
+        <table class="ticketTable">
             <tr>
                 <th>Ticket id</th>
                 <th>Creation Date</th>
@@ -40,7 +42,7 @@ if (isset($_POST['OpenClosedAll'])) {
                 <th>Last Comment</th>
                 <th>Ticket Status</th>
             </tr>
-                
+
             <?php foreach ($tickets as $ticket) :
                 switch ($status) {
                     case 'All':
@@ -130,10 +132,10 @@ if (isset($_POST['OpenClosedAll'])) {
             }
         endforeach; ?>
         </table>
-        <?php 
-            if (count($tickets) == 0) {
-                echo '<p>You don\'t have any tickets</p>';
-            }
+        <?php
+        if (count($tickets) == 0) {
+            echo '<p>You don\'t have any tickets</p>';
+        }
         ?>
     </div>
 </section>
